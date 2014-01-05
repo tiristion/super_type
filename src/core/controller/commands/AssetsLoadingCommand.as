@@ -1,5 +1,5 @@
-package core.controller.commands
-{
+package core.controller.commands {
+
 	import configs.GeneralNotifications;
 	
 	import core.model.proxy.LevelsConfigProxy;
@@ -17,21 +17,26 @@ package core.controller.commands
 	import utils.WarehouseAssets;
 	
 	public class AssetsLoadingCommand extends SimpleCommand {
+
 		private var _levelsConfigsPath:String;
 		
-		override public function execute(notification:INotification):void{
+		override public function execute(notification:INotification):void {
+
 			var mainconfigXmlList:Array = notification.getBody() as Array;
 			var multiLoader:MultiLoader=new MultiLoader;
 			
-			for(var i:int=0;i<mainconfigXmlList.length;i++){
-				switch(mainconfigXmlList[i].type){
-					case "movie":
+			for(var i:int=0;i<mainconfigXmlList.length;i++) {
+
+				switch(mainconfigXmlList[i].type) {
+					case "movie": {
 						multiLoader.addTask(mainconfigXmlList[i].value, mainconfigXmlList[i].name, MultiLoader.MOVIE);
 						break;
-					case "xml":
+                    }
+					case "xml": {
 						multiLoader.addTask(mainconfigXmlList[i].value, mainconfigXmlList[i].name, MultiLoader.TEXT);
 						_levelsConfigsPath = mainconfigXmlList[i].value as String;
-						break
+						break;
+                    }
 				}
 			}
 			
@@ -41,27 +46,32 @@ package core.controller.commands
 			multiLoader.start();
 		}
 		
-		private function onProgress(event:ProgressEvent):void{
+		private function onProgress(event:ProgressEvent):void {
+
 			var multiLoader:MultiLoader = MultiLoader(event.target);
 			var progress:int = Math.floor(multiLoader.progress*100);
 			sendNotification(GeneralNotifications.PRELOADER_UPDATE,progress)
 		}
 	
-		private function onItemComplete(event:Event):void{
+		private function onItemComplete(event:Event):void {
+
 		}
 	
-		private function onComplete(event:Event):void{
+		private function onComplete(event:Event):void {
+
 			facade.removeMediator(PreloaderMediator.NAME);
 			var multiLoader:MultiLoader = event.target as MultiLoader;
-			for(var i:int=0;i<multiLoader.length;i++){
+
+            for(var i:int=0;i<multiLoader.length;i++) {
 				var registrationNameOfTask:String=multiLoader.getItemRegistrationName(i);
-				if(multiLoader.getItemType(i)==MultiLoader.MOVIE){
+				if(multiLoader.getItemType(i)==MultiLoader.MOVIE) {
 					WarehouseAssets.getInstance().setAssets([{filename:registrationNameOfTask, content:Loader(multiLoader.getContentByRegistrationName(registrationNameOfTask)).content as MovieClip}]);
 				}
-				if(multiLoader.getItemType(i)==MultiLoader.TEXT){
+				if(multiLoader.getItemType(i)==MultiLoader.TEXT) {
 					var xml:XML = XML(multiLoader.getContentByRegistrationName(registrationNameOfTask));
 				}
-			}	
+			}
+
 			sendNotification(GeneralNotifications.ASSETS_LOADED);
 			facade.registerProxy(new LevelsConfigProxy(xml));
 		}

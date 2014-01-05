@@ -1,5 +1,5 @@
-package core.controller.commands
-{
+package core.controller.commands {
+
 	import configs.GeneralNotifications;
 	
 	import core.model.dataobject.FlashVarsDO;
@@ -14,11 +14,10 @@ package core.controller.commands
 	import org.puremvc.as3.interfaces.INotification;
 	import org.puremvc.as3.patterns.command.SimpleCommand;
 	
-	
-	public class StartupCommand extends SimpleCommand
-	{
-		override public function execute(notification:INotification):void
-		{
+	public class StartupCommand extends SimpleCommand {
+
+		override public function execute(notification:INotification):void {
+
 			//application initialization
 			var root:Sprite=notification.getBody() as Sprite;
 		
