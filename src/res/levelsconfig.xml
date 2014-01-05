@@ -1,0 +1,6 @@
+<config>
+	<game_1 id = "Level1" url = "../src/res/swf/level1.swf" unlock = "0" letters = "fj" mistakes = "5"/>
+	<game_2 id = "Level2" url = "../src/res/swf/level2.swf" unlock = "50" letters = "fjfjdk" mistakes = "3"/>
+	<game_3 id = "Level3" url = "../src/res/swf/level3.swf" unlock = "125" letters = "fjdkdfghjk" mistakes = "1"/>
+	<game_4 id = "Level4" url = "../src/res/swf/level4.swf" unlock = "200" letters = "fjdkdfghjksl" mistakes = "2"/>
+</config>

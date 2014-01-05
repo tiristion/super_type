@@ -1,0 +1,7 @@
+<config>
+	<asset name = "Lobby" type = "movie" value = "../src/res/swf/lobby.swf"/>
+	<asset name = "TopPanel" type = "movie" value = "../src/res/swf/toppanel.swf"/>
+	<asset name = "Popups" type = "movie" value = "../src/res/swf/popups.swf"/>
+	<asset name = "LevelsConfig" type = "xml" value = "../src/res/levelsconfig.xml"/>
+</config>
+
