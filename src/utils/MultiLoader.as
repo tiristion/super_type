@@ -1,4 +1,5 @@
 package utils {
+
 	import flash.display.Loader;
 	import flash.display.LoaderInfo;
 	import flash.events.Event;
@@ -68,6 +69,7 @@ package utils {
 		* @return    Number of tasks <code>TEXT</code>, or <code>MOVIE</code>. Default value is <code>TEXT</code>.
 		*/
 		public function addTask(url:String, registrationName:String, type:String = TEXT):int {
+
 			var position:int = load_arr.length;
 			
 			var arr:Array = new Array();
@@ -82,18 +84,21 @@ package utils {
 		}
 		
 		public function start ():void {
+
 			_currentIndex = 0;
 			loadItem();
 			addEventListener(ITEM_COMPLETE, onItemComplete);
 		}
 		
 		public function loadByXML(xmlLink:String):void {
+
 			addTask(xmlLink, "settings");
 			loadItem();
 			addEventListener(ITEM_COMPLETE, onSettingsLoaded);
 		}
 		
 		private function onSettingsLoaded(e:Event):void {
+
 			removeEventListener(ITEM_COMPLETE, onSettingsLoaded);
 			var xml:XMLList = (new XML(getItemContent(0))).children();
 			
@@ -110,6 +115,7 @@ package utils {
 					}
 				}
 			}
+
 			_currentIndex++;
 			loadItem();
 			addEventListener(ITEM_COMPLETE, onItemComplete);
@@ -117,22 +123,33 @@ package utils {
 		}
 		
 		private function getTypeByURL(url:String):String {
+
 			var arr:Array = url.split(".");
 			var ext:String = arr[arr.length - 1];
 			var i:int = ext.search(/jpg|png|gif|swf/);
 			var type:String;
-			if (ext.search(/jpg|png|gif|swf/) >=0) type = MOVIE;
-			return type;
+
+			if (ext.search(/jpg|png|gif|swf/) >=0) {
+                type = MOVIE;
+            }
+
+            return type;
 		}
 		
 		public function get progress():Number {
-			if (_currentIndex >= length) return 1;
-			return (_currentIndex + itemProgress)/length; 
+
+			if (_currentIndex >= length) {
+                return 1;
+            }
+
+            return (_currentIndex + itemProgress)/length;
 		}
 		
 		public function get itemProgress():Number {
+
 			var progress:Number;
-			switch (getItemType(_currentIndex)) {
+
+            switch (getItemType(_currentIndex)) {
 				case TEXT:
 					var urlLoader:URLLoader = URLLoader(getItemLoader(_currentIndex));
 					progress = urlLoader.bytesLoaded / urlLoader.bytesTotal;
@@ -148,17 +165,21 @@ package utils {
 		}
 		
 		public function getContentByRegistrationName(registrationName:String):Object {
+
 			return loaded_obj[registrationName];
 		}
 		
 		public function isPropertyRegistered(registrationName:String):Boolean {
+
 			return Boolean(loaded_obj[registrationName]);
 		}
 		
 		private function loadItem():void {
+
 			var urlRequest:URLRequest = new URLRequest(getItemURL(_currentIndex));
 			setItemStatus(_currentIndex, STATUS_LOADING); 
-			switch (getItemType(_currentIndex)) {
+
+            switch (getItemType(_currentIndex)) {
 				case TEXT:
 					var urlLoader:URLLoader = new URLLoader();
 					urlLoader.addEventListener(Event.COMPLETE, onItemLoaded);
@@ -182,16 +203,19 @@ package utils {
 		}
 		
 		private function onProgress(e:Event):void {
+
 			dispatchEvent(e);
 		}
 		
 		private function onError(e:IOErrorEvent):void {
+
 			setItemStatus(_currentIndex, STATUS_COMPLETE);
 			setItemContent(_currentIndex, null);
 			dispatchEvent(new Event(ITEM_COMPLETE));
 		}		
 		
 		private function onItemLoaded(e:Event):void {
+
 			switch (getItemType(_currentIndex)) {
 				case TEXT:
 					setItemContent(_currentIndex, URLLoader(e.target).data);
@@ -203,15 +227,16 @@ package utils {
 					throw new Error("Wrong task type in task at position " + _currentIndex + ": link" + getItemURL(_currentIndex));
 				break;
 			}
-			setItemStatus(_currentIndex, STATUS_COMPLETE);
+
+            setItemStatus(_currentIndex, STATUS_COMPLETE);
 			dispatchEvent(new Event(ITEM_COMPLETE));
 		}
 
-		
-		
 		private function onItemComplete(e:Event):void {
+
 			_currentIndex++;
-			if (_currentIndex < length) {
+
+            if (_currentIndex < length) {
 				loadItem();
 			} else {
 				dispatchEvent(new Event(Event.COMPLETE));
