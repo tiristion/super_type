@@ -43,7 +43,7 @@ package utils {
 		}
 		
 		public function hasAsset(assetName:String,assetSpace:String=null):Boolean {
-            
+
 			if(assetSpace!=null) {
                 for(var i:int=0; i<_assetsArray.length; i++) {
                     if(_assetsArray[i].filename==assetSpace) {
@@ -57,6 +57,7 @@ package utils {
 					}
 				}
             }
+            
 			return false;
 		}
 	}
