@@ -5,7 +5,7 @@
       <configuration name="SuperType" pure-as="true" main-class="SuperType" output-file="SuperType.swf" output-folder="$MODULE_DIR$/bin-debug" use-html-wrapper="true" wrapper-template-path="$MODULE_DIR$/html-template">
         <dependencies target-player="11.1">
           <entries>
-            <entry library-id="36cc89d0-0221-4f78-b40f-7b663a34e036">
+            <entry library-id="b244f850-aa25-4b54-a97f-4c55ea989098">
               <dependency linkage="Merged" />
             </entry>
           </entries>
@@ -32,7 +32,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library" exported="">
       <library type="flex">
-        <properties id="36cc89d0-0221-4f78-b40f-7b663a34e036" />
+        <properties id="b244f850-aa25-4b54-a97f-4c55ea989098" />
         <CLASSES>
           <root url="jar://$MODULE_DIR$/lib/PureMVC_AS3_2_0_4.swc!/" />
         </CLASSES>
