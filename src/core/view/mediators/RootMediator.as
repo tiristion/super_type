@@ -1,4 +1,5 @@
 package core.view.mediators {
+
 	import configs.GeneralNotifications;
 	
 	import flash.display.DisplayObject;
@@ -8,24 +9,27 @@ package core.view.mediators {
 	import org.puremvc.as3.patterns.mediator.Mediator;
 	
 	public class RootMediator extends Mediator {
+
 		static public const NAME:String="RootMediator";
 		
 		public function RootMediator(viewComponent:Sprite) {
+
 			super(NAME, viewComponent);
 		}
 		
 		public function get content():Sprite {
+
 			return viewComponent as Sprite;	
 		}
 		
 		override public function listNotificationInterests():Array {
-		 	return	[
-				 GeneralNotifications.ADD_CHILD_TO_ROOT,
-				 GeneralNotifications.REMOVE_CHILD_FROM_ROOT
-		 	];
+
+		 	return	[ GeneralNotifications.ADD_CHILD_TO_ROOT,
+				 GeneralNotifications.REMOVE_CHILD_FROM_ROOT ];
 		} 
 		
 		override public function handleNotification(notification:INotification):void {
+
 			switch(notification.getName()) {
 				case GeneralNotifications.ADD_CHILD_TO_ROOT:
 					(viewComponent as Sprite).addChild(notification.getBody() as DisplayObject);

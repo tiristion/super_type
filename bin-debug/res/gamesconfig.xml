@@ -1,5 +1,0 @@
-<config>
-	<game_1 id = "level1" url = "res/warehouses/level1.swf" unlock = "0" letters = "asdfghjkl"/>
-	<game_2 id = "level2" url = "res/warehouses/level2.swf" unlock = "25" letters = "asdfghjklqwertyuiop"/>
-	<game_3 id = "level3" url = "res/warehouses/level3.swf" unlock = "50" letters = "asdfghjklzxcvbnm"/>
-</config>

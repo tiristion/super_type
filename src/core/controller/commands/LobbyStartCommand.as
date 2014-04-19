@@ -1,5 +1,5 @@
-package core.controller.commands
-{
+package core.controller.commands {
+
 	import configs.GeneralNotifications;
 	
 	import core.model.dataobject.PopupDoActionDO;
@@ -13,10 +13,10 @@ package core.controller.commands
 	import org.puremvc.as3.interfaces.INotification;
 	import org.puremvc.as3.patterns.command.SimpleCommand;
 	
-	public class LobbyStartCommand extends SimpleCommand
-	{
-		override public function execute(notification:INotification):void
-		{
+	public class LobbyStartCommand extends SimpleCommand {
+
+		override public function execute(notification:INotification):void {
+
 			facade.registerMediator(new LobbyMediator(new LobbyViewLogic()));
 			facade.registerMediator(new TopPanelMediator(new TopPanelViewLogic()));
 			sendNotification(GeneralNotifications.SHOW_USER_LOGIN);

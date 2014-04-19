@@ -1,4 +1,5 @@
 package core.view.components {
+
 	import flash.display.MovieClip;
 	
 	import utils.WarehouseAssets;
@@ -10,8 +11,8 @@ package core.view.components {
 		private var popupMC:MovieClip;
 		
 		public function PopupViewLogic(popupName:String) {
+
 			dialogName = popupName;
-			var a : Boolean = WarehouseAssets.getInstance().hasAsset(popupName);
 			popupMC =  new (WarehouseAssets.getInstance().getAsset(popupName) as Class);
 			super(popupMC);
 		}

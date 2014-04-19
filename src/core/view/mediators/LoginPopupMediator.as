@@ -1,4 +1,5 @@
 package core.view.mediators {
+
 	import configs.GeneralNotifications;
 	
 	import core.model.dataobject.PopupDoActionDO;
@@ -16,18 +17,23 @@ package core.view.mediators {
 		private var dialogName:String;
 		
 		public function LoginPopupMediator(popupViewLogic:LoginPopupViewLogic, doActionDO:PopupDoActionDO=null) {
+
 			super( popupViewLogic.dialogName, popupViewLogic );
 			this.doActionDo = doActionDO;
 			dialogName = popupViewLogic.dialogName;
 			popupViewLogic.content['doButton'].addEventListener( MouseEvent.CLICK, doButtonHandler);
 		}
+
 		public function closePopup( event:Event = null ):void {
+
 			sendNotification(GeneralNotifications.CLOSE_POPUP, dialogName);
 		}
 		
 		override public function listNotificationInterests():Array {
+
 			return[GeneralNotifications.PASSWORD_ACCEPTED,GeneralNotifications.PASSWORD_DENIED];
 		}
+
 		override public function handleNotification(notification:INotification):void {
 			switch(notification.getName()) {
 				case GeneralNotifications.PASSWORD_ACCEPTED:
@@ -38,11 +44,14 @@ package core.view.mediators {
 					break;
 			}
 		}
+
 		public function doButtonHandler(event:MouseEvent):void {
+
 			var user:UserDO = new UserDO;
 			user.name = viewLogic.content["InputUserName"].text;
 			user.password = viewLogic.content["InputUserPassword"].text;
-			if(user.name!=""){
+
+            if(user.name!="") {
 				 sendNotification(doActionDo.notificationName,user);
 			 }
 		}

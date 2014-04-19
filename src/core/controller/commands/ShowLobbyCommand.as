@@ -1,5 +1,5 @@
-package core.controller.commands
-{
+package core.controller.commands {
+
 	import configs.GeneralNotifications;
 	
 	import core.model.proxy.LevelsConfigProxy;
@@ -12,9 +12,10 @@ package core.controller.commands
 	import org.puremvc.as3.interfaces.INotification;
 	import org.puremvc.as3.patterns.command.SimpleCommand;
 	
-	public class ShowLobbyCommand extends SimpleCommand
-	{
-		override public function execute(notification:INotification):void{
+	public class ShowLobbyCommand extends SimpleCommand	{
+
+		override public function execute(notification:INotification):void {
+
 			facade.removeMediator(GameMediator.NAME);
 			facade.registerMediator(new LobbyMediator(new LobbyViewLogic()));
 			facade.registerMediator(new TopPanelMediator(new TopPanelViewLogic()));

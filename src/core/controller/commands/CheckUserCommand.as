@@ -1,4 +1,5 @@
 package core.controller.commands {
+
 	import configs.GeneralNotifications;
 	
 	import core.model.dataobject.PopupDoActionDO;
@@ -13,27 +14,29 @@ package core.controller.commands {
 	
 	public class CheckUserCommand extends SimpleCommand {
 		
-		override public function execute(notification: INotification):void{
-			var userName:String = notification.getBody().name as String;
-			var userPassword:String = notification.getBody().password as String;
+		override public function execute(notification: INotification):void {
+
+			var userName:String = (notification.getBody() as Object).name as String;
+			var userPassword:String = (notification.getBody() as Object).password as String;
 			
 			SharedStorage.getInstance().createShared(userName);
 			var welcomeDADO:PopupDoActionDO = new PopupDoActionDO(GeneralNotifications.CLEAR_USER,{levelScore:0});
-			if(SharedStorage.getInstance().hasUserData()==false){
+
+            if(SharedStorage.getInstance().hasUserData()==false) {
+
 				SharedStorage.getInstance().createUser(userName,userPassword);
 				facade.registerProxy(new UserProxy(SharedStorage.getInstance().getUserData()));
 				sendNotification(GeneralNotifications.PASSWORD_ACCEPTED);
 				facade.registerMediator(new PopupMediator(new PopupViewLogic('PopupWelcome'),welcomeDADO));
-			}
-			else{ 
-				if(SharedStorage.getInstance().checkPassword(userPassword) == true){
+			} else {
+				if(SharedStorage.getInstance().checkPassword(userPassword) == true) {
 					facade.registerProxy(new UserProxy(SharedStorage.getInstance().getUserData()));
 					sendNotification(GeneralNotifications.PASSWORD_ACCEPTED);
 					facade.registerMediator(new PopupMediator(new PopupViewLogic('PopupWelcome'),welcomeDADO));
-				}	
-				else
-					sendNotification(GeneralNotifications.PASSWORD_DENIED);
-			}	
+				} else {
+                    sendNotification(GeneralNotifications.PASSWORD_DENIED);
+                }
+			}
 		}
 	}
 }

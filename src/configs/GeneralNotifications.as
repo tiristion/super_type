@@ -1,6 +1,7 @@
-package configs
-{
-	public class GeneralNotifications{
+package configs {
+
+	public class GeneralNotifications {
+
 		public static const STARTUP:String='startup';
 		public static const ADD_CHILD_TO_ROOT:String='addChildToRoot';
 		public static const ASSETS_LOADED:String='assetsLoaded';
