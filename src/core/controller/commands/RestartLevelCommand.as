@@ -16,13 +16,17 @@ package core.controller.commands {
 		override public function execute(notification:INotification):void {
 
 			_levelConfig = (facade.retrieveProxy(LevelsConfigProxy.NAME) as LevelsConfigProxy).getLevelInfo(notification.getBody() as String);
+
 			var levelConfig:LevelConfigDO = new LevelConfigDO;
+
 			levelConfig.id = _levelConfig.id;
 			levelConfig.unlockValue = _levelConfig.unlockValue;
 			levelConfig.url = _levelConfig.url;
 			levelConfig.letters = createLevelString();
 			levelConfig.mistakes = _levelConfig.mistakes;
+
 			facade.registerProxy(new GameProxy(levelConfig));
+
 			sendNotification(GeneralNotifications.UPDATE_LEVEL_SCORE, {levelScore:0, mistakes:_levelConfig.mistakes});
 			sendNotification(GeneralNotifications.NEW_LEVEL_LETTERS,levelConfig.letters);
 		}

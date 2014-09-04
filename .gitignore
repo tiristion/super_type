@@ -1,6 +1,7 @@
 .actionScriptProperties
 .project
 .settings
+.idea
 bin-debug
 bin-release
 html-template
