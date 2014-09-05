@@ -41,8 +41,14 @@ package core.controller.commands {
 				
 			//register Proxies
 			facade.registerProxy(new FlashVarsProxy(new FlashVarsDO(root.loaderInfo.parameters)));
-			var mainConfigPath:String = (facade.retrieveProxy(FlashVarsProxy.NAME) as FlashVarsProxy).flashVars.mainConfigPath;
+
+			var mainConfigPath:String = flashVarsProxy.flashVars.mainConfigPath;
 			facade.registerProxy(new MainConfigProxy(mainConfigPath));
 		}
+
+        public function get flashVarsProxy():FlashVarsProxy {
+
+            return facade.retrieveProxy(FlashVarsProxy.NAME) as FlashVarsProxy;
+        }
 	}
 }

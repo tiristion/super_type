@@ -22,6 +22,7 @@ package core.controller.commands {
 		}
 
         private function registerMainMediators():void {
+
             facade.removeMediator(GameMediator.NAME);
             facade.registerMediator(new LobbyMediator(new LobbyViewLogic()));
             facade.registerMediator(new TopPanelMediator(new TopPanelViewLogic()));

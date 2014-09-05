@@ -15,10 +15,10 @@ package core.controller.commands {
 		
 		override public function execute(notification:INotification):void {
 
-			levelConfig = (facade.retrieveProxy(LevelsConfigProxy.NAME) as LevelsConfigProxy).getLevelInfo(notification.getBody() as String);
+            var levelId:String = notification.getBody() as String;
+			levelConfig = levelsConfigProxy.getLevelInfo(levelId);
 
-			var currentLevelConfig:LevelConfigDO = new LevelConfigDO;
-
+			var currentLevelConfig:LevelConfigDO = new LevelConfigDO();
 			currentLevelConfig.id = levelConfig.id;
 			currentLevelConfig.unlockValue = levelConfig.unlockValue;
 			currentLevelConfig.url = levelConfig.url;
@@ -28,7 +28,7 @@ package core.controller.commands {
 			facade.registerProxy(new GameProxy(currentLevelConfig));
 
 			sendNotification(GeneralNotifications.UPDATE_LEVEL_SCORE, {levelScore:0, mistakes:levelConfig.mistakes});
-			sendNotification(GeneralNotifications.NEW_LEVEL_LETTERS,currentLevelConfig.letters);
+			sendNotification(GeneralNotifications.NEW_LEVEL_LETTERS, currentLevelConfig.letters);
 		}
 
 		private function createLevelString():String {
@@ -50,5 +50,10 @@ package core.controller.commands {
 
 			return levelString;
 		}
+
+        public function get levelsConfigProxy():LevelsConfigProxy {
+
+            return facade.retrieveProxy(LevelsConfigProxy.NAME) as LevelsConfigProxy;
+        }
 	}
 }

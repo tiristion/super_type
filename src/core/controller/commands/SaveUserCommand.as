@@ -1,4 +1,5 @@
 package core.controller.commands {
+
 	import configs.GeneralNotifications;
 	
 	import core.model.proxy.UserProxy;
@@ -12,10 +13,14 @@ package core.controller.commands {
 
 		override public function execute(notification:INotification):void {
 
-			var userProxy:UserProxy = facade.retrieveProxy(UserProxy.NAME) as UserProxy;
 			userProxy.updateUserData((notification.getBody() as Object).levelScore);
 			SharedStorage.getInstance().saveUserData(userProxy.userData);
 			sendNotification(GeneralNotifications.SHOW_LOBBY);
 		}
+
+        public function userProxy():UserProxy {
+
+            return facade.retrieveProxy(UserProxy.NAME) as UserProxy;
+        }
 	}
 }
