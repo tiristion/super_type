@@ -11,24 +11,24 @@ package core.controller.commands {
 
     public class RestartLevelCommand extends SimpleCommand {
 
-		private var _levelConfig:LevelConfigDO;
+		private var levelConfig:LevelConfigDO;
 		
 		override public function execute(notification:INotification):void {
 
-			_levelConfig = (facade.retrieveProxy(LevelsConfigProxy.NAME) as LevelsConfigProxy).getLevelInfo(notification.getBody() as String);
+			levelConfig = (facade.retrieveProxy(LevelsConfigProxy.NAME) as LevelsConfigProxy).getLevelInfo(notification.getBody() as String);
 
-			var levelConfig:LevelConfigDO = new LevelConfigDO;
+			var currentLevelConfig:LevelConfigDO = new LevelConfigDO;
 
-			levelConfig.id = _levelConfig.id;
-			levelConfig.unlockValue = _levelConfig.unlockValue;
-			levelConfig.url = _levelConfig.url;
-			levelConfig.letters = createLevelString();
-			levelConfig.mistakes = _levelConfig.mistakes;
+			currentLevelConfig.id = levelConfig.id;
+			currentLevelConfig.unlockValue = levelConfig.unlockValue;
+			currentLevelConfig.url = levelConfig.url;
+			currentLevelConfig.letters = createLevelString();
+			currentLevelConfig.mistakes = levelConfig.mistakes;
 
-			facade.registerProxy(new GameProxy(levelConfig));
+			facade.registerProxy(new GameProxy(currentLevelConfig));
 
-			sendNotification(GeneralNotifications.UPDATE_LEVEL_SCORE, {levelScore:0, mistakes:_levelConfig.mistakes});
-			sendNotification(GeneralNotifications.NEW_LEVEL_LETTERS,levelConfig.letters);
+			sendNotification(GeneralNotifications.UPDATE_LEVEL_SCORE, {levelScore:0, mistakes:levelConfig.mistakes});
+			sendNotification(GeneralNotifications.NEW_LEVEL_LETTERS,currentLevelConfig.letters);
 		}
 
 		private function createLevelString():String {
@@ -38,14 +38,14 @@ package core.controller.commands {
 
             for(var i:int=0;i<20;i++) {
 
-				var nom:int = Math.round(Math.random()*_levelConfig.letters.length) - 1;
+				var nom:int = Math.round(Math.random() * levelConfig.letters.length) - 1;
 
-				if(nom==-1) {
+				if(nom == -1) {
                     nom++;
                 }
 
-				levelString=levelString + _levelConfig.letters.charAt(nom);
-				lettersArray[i] = _levelConfig.letters.charAt(nom);
+				levelString = levelString + levelConfig.letters.charAt(nom);
+				lettersArray[i] = levelConfig.letters.charAt(nom);
 			}
 
 			return levelString;

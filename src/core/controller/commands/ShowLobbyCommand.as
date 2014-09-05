@@ -16,11 +16,20 @@ package core.controller.commands {
 
 		override public function execute(notification:INotification):void {
 
-			facade.removeMediator(GameMediator.NAME);
-			facade.registerMediator(new LobbyMediator(new LobbyViewLogic()));
-			facade.registerMediator(new TopPanelMediator(new TopPanelViewLogic()));
-			var levelsConfigsProxy:LevelsConfigProxy = facade.retrieveProxy(LevelsConfigProxy.NAME) as LevelsConfigProxy;
-			sendNotification(GeneralNotifications.LEVELS_CONFIGS_LOADED,levelsConfigsProxy.levelInfo);
+			registerMainMediators();
+
+			sendNotification(GeneralNotifications.LEVELS_CONFIGS_LOADED, levelsConfigProxy.levelInfo);
 		}
+
+        private function registerMainMediators():void {
+            facade.removeMediator(GameMediator.NAME);
+            facade.registerMediator(new LobbyMediator(new LobbyViewLogic()));
+            facade.registerMediator(new TopPanelMediator(new TopPanelViewLogic()));
+        }
+
+        public function get levelsConfigProxy():LevelsConfigProxy {
+
+            return facade.retrieveProxy(LevelsConfigProxy.NAME) as LevelsConfigProxy;
+        }
 	}
 }

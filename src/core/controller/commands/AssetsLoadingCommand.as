@@ -18,23 +18,22 @@ package core.controller.commands {
 	
 	public class AssetsLoadingCommand extends SimpleCommand {
 
-		private var _levelsConfigsPath:String;
-		
 		override public function execute(notification:INotification):void {
 
-			var mainconfigXmlList:Array = notification.getBody() as Array;
-			var multiLoader:MultiLoader=new MultiLoader;
-			
-			for(var i:int=0;i<mainconfigXmlList.length;i++) {
+			var mainConfigXmlList:Array = notification.getBody() as Array;
+			var multiLoader:MultiLoader = new MultiLoader();
+            var levelsConfigPath:String = '';
 
-				switch(mainconfigXmlList[i].type) {
+            for(var i:int = 0; i < mainConfigXmlList.length; i++) {
+
+				switch(mainConfigXmlList[i].type) {
 					case "movie": {
-						multiLoader.addTask(mainconfigXmlList[i].value, mainconfigXmlList[i].name, MultiLoader.MOVIE);
+						multiLoader.addTask(mainConfigXmlList[i].value, mainConfigXmlList[i].name, MultiLoader.MOVIE);
 						break;
                     }
 					case "xml": {
-						multiLoader.addTask(mainconfigXmlList[i].value, mainconfigXmlList[i].name, MultiLoader.TEXT);
-						_levelsConfigsPath = mainconfigXmlList[i].value as String;
+						multiLoader.addTask(mainConfigXmlList[i].value, mainConfigXmlList[i].name, MultiLoader.TEXT);
+						levelsConfigPath = mainConfigXmlList[i].value as String;
 						break;
                     }
 				}
@@ -50,6 +49,7 @@ package core.controller.commands {
 
 			var multiLoader:MultiLoader = MultiLoader(event.target);
 			var progress:int = Math.floor(multiLoader.progress*100);
+
 			sendNotification(GeneralNotifications.PRELOADER_UPDATE,progress)
 		}
 	
@@ -63,11 +63,13 @@ package core.controller.commands {
 			var multiLoader:MultiLoader = event.target as MultiLoader;
 
             for(var i:int=0;i<multiLoader.length;i++) {
+
 				var registrationNameOfTask:String=multiLoader.getItemRegistrationName(i);
-				if(multiLoader.getItemType(i)==MultiLoader.MOVIE) {
+
+				if(multiLoader.getItemType(i) == MultiLoader.MOVIE) {
 					WarehouseAssets.getInstance().setAssets([{filename:registrationNameOfTask, content:Loader(multiLoader.getContentByRegistrationName(registrationNameOfTask)).content as MovieClip}]);
 				}
-				if(multiLoader.getItemType(i)==MultiLoader.TEXT) {
+				if(multiLoader.getItemType(i) == MultiLoader.TEXT) {
 					var xml:XML = XML(multiLoader.getContentByRegistrationName(registrationNameOfTask));
 				}
 			}
