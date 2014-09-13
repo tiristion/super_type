@@ -10,44 +10,42 @@ package core.view.mediators {
 	public class LobbyMediator extends UIMediator {
 
 		static public const NAME:String = "LobbyMediator";
-		private var _gameInfoDO:Array;
-		private var _score:int;
+		private var gameInfoDO:Array;
+		private var score:int;
 		
 		public function LobbyMediator(viewComponent:LobbyViewLogic) {
 
-			super(NAME,viewComponent);
-			(viewComponent as LobbyViewLogic).addEventListener(CustomEvent.LEVEL_CLICKED, handlerOnLevelIconClick);
+			super(NAME, viewComponent);
+			(viewComponent as LobbyViewLogic).addEventListener(CustomEvent.GAME_ICON_CLICKED, handlerOnGameIconClick);
 		}
 		
-		public function handlerOnLevelIconClick(event:CustomEvent):void {
+		public function handlerOnGameIconClick(event:CustomEvent):void {
 
-			sendNotification(GeneralNotifications.LOAD_LEVEL,event.data);
+            var gameName:String = event.data as String;
+			sendNotification(GeneralNotifications.LOAD_LEVEL, gameName);
 		}
 		
-		override public function onRegister():void {
-
-			super.onRegister();
-		}
-	
 		override public function listNotificationInterests():Array {
 
-			return [GeneralNotifications.USER_DATA_UPDATED,
+			return [
+                GeneralNotifications.USER_DATA_UPDATED,
 				GeneralNotifications.LEVELS_CONFIGS_LOADED,
-				GeneralNotifications.CLEAR_USER];
+				GeneralNotifications.CLEAR_USER
+            ];
 		}
 
 		override public function handleNotification(notification:INotification):void {
 
 			switch(notification.getName()) {
 				case GeneralNotifications.USER_DATA_UPDATED:
-					_score = notification.getBody().score as int;
-					(viewComponent as LobbyViewLogic).unlockLevels(_score,_gameInfoDO);
+					score = notification.getBody().score as int;
+					(viewComponent as LobbyViewLogic).unlockLevels(score, gameInfoDO);
 					break;
 				case GeneralNotifications.LEVELS_CONFIGS_LOADED:
-					_gameInfoDO = notification.getBody() as Array;
+					gameInfoDO = notification.getBody() as Array;
 					break;
 				case GeneralNotifications.CLEAR_USER:
-					(viewComponent as LobbyViewLogic).unlockLevels(0,_gameInfoDO);
+					(viewComponent as LobbyViewLogic).unlockLevels(0, gameInfoDO);
 					break;
 			}	
 		}	

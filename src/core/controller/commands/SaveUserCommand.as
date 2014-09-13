@@ -18,7 +18,7 @@ package core.controller.commands {
 			sendNotification(GeneralNotifications.SHOW_LOBBY);
 		}
 
-        public function userProxy():UserProxy {
+        public function get userProxy():UserProxy {
 
             return facade.retrieveProxy(UserProxy.NAME) as UserProxy;
         }

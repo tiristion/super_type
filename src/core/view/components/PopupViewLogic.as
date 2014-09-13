@@ -14,6 +14,7 @@ package core.view.components {
 
 			dialogName = popupName;
 			popupMC =  new (WarehouseAssets.getInstance().getAsset(popupName) as Class);
+
 			super(popupMC);
 		}
 	}	

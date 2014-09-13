@@ -19,7 +19,9 @@ package core.controller.commands {
 
 			facade.registerMediator(new LobbyMediator(new LobbyViewLogic()));
 			facade.registerMediator(new TopPanelMediator(new TopPanelViewLogic()));
+
 			sendNotification(GeneralNotifications.SHOW_USER_LOGIN);
+
 			var loginPopupDADO:PopupDoActionDO = new PopupDoActionDO(GeneralNotifications.REGISTER_USER_INFO);
 			facade.registerMediator(new LoginPopupMediator(new LoginPopupViewLogic(),loginPopupDADO));
 		}

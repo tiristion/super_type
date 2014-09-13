@@ -34,12 +34,14 @@ package core.model.proxy {
 			sendNotification(GeneralNotifications.USER_DATA_UPDATED,_userDO);
 		}
 
-		public function updateUserData(levelScore:Number):void{
+		public function updateUserData(levelScore:Number):void {
+
 			_userDO.score += levelScore;
 			sendNotification(GeneralNotifications.USER_DATA_UPDATED,_userDO);
 		}
 
 		public function clearUserData():void{
+
 			_userDO.score = 0;
 			sendNotification(GeneralNotifications.USER_DATA_UPDATED,_userDO);
 		}	

@@ -10,24 +10,34 @@ package core.view.components {
 	import utils.WarehouseAssets;
 
 	public class TopPanelViewLogic extends ViewLogic {
-		public static const NAME:String="TopPanelViewLogic";
-		private var _sprite:DisplayObjectContainer;
-		private var _userScore:Number;
+
+		public static const NAME:String = "TopPanelViewLogic";
+
+		private var topPanelContainer:DisplayObjectContainer;
+		private var userScoreNumber:Number;
 
 		public function TopPanelViewLogic():void {
 
-			_sprite = new (WarehouseAssets.getInstance().getAsset("TopPanel") as Class);
-			super(_sprite);
+			topPanelContainer = new (WarehouseAssets.getInstance().getAsset("TopPanel") as Class);
+
+			super(topPanelContainer);
+
 			visibleLevelComponents(false);
 
-			content["BackButton"].addEventListener(MouseEvent.CLICK, handlerLobbyButtonClick);
-			content["RestartButton"].addEventListener(MouseEvent.CLICK, handlerRestartButtonClick);
-			content["ExitButton"].addEventListener(MouseEvent.CLICK, handlerExitButtonClick);
+			addListeners();
 		}
+
+        private function addListeners():void {
+
+            content["BackButton"].addEventListener(MouseEvent.CLICK, handlerLobbyButtonClick);
+            content["RestartButton"].addEventListener(MouseEvent.CLICK, handlerRestartButtonClick);
+            content["ExitButton"].addEventListener(MouseEvent.CLICK, handlerExitButtonClick);
+        }
 
 		public function userDataUpdate(userName:String,userScore:Number):void {
 
-			_userScore = userScore;
+			userScoreNumber = userScore;
+
 			content["UserName"].text = userName;
 			content["Score"].text = userScore.toString();
 		}
@@ -35,7 +45,7 @@ package core.view.components {
 		private function handlerExitButtonClick(event:MouseEvent):void {
 
 			var req:URLRequest = new URLRequest("javascript:window.close();");
-			navigateToURL(req,"_self");
+			navigateToURL(req, "_self");
 		}
 
 		private function handlerLobbyButtonClick(event:MouseEvent):void {
@@ -70,11 +80,7 @@ package core.view.components {
 		public function showLives(lives:Number):void {
 
 			for(var i:int = 1; i <= 7; i++) {
-				if(i<=lives) {
-					content["Live"+i].visible = true;
-				} else {
-					content["Live"+i].visible = false;
-				}
+                content["Live" + i].visible = (i <= lives);
 			}
 		}
 	}
