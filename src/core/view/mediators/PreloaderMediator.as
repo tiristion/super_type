@@ -13,7 +13,7 @@ package core.view.mediators {
 		
 		public function PreloaderMediator(viewComponent:PreloaderViewLogic) {
 
-				super(NAME,viewComponent)
+				super(NAME, viewComponent)
 		}
 		
 		override public function onRegister():void {

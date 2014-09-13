@@ -10,13 +10,15 @@ package core.view.mediators {
 	public class LobbyMediator extends UIMediator {
 
 		static public const NAME:String = "LobbyMediator";
+
 		private var gameInfoDO:Array;
 		private var score:int;
 		
 		public function LobbyMediator(viewComponent:LobbyViewLogic) {
 
 			super(NAME, viewComponent);
-			(viewComponent as LobbyViewLogic).addEventListener(CustomEvent.GAME_ICON_CLICKED, handlerOnGameIconClick);
+
+			viewComponent.addEventListener(CustomEvent.GAME_ICON_CLICKED, handlerOnGameIconClick);
 		}
 		
 		public function handlerOnGameIconClick(event:CustomEvent):void {
@@ -39,13 +41,13 @@ package core.view.mediators {
 			switch(notification.getName()) {
 				case GeneralNotifications.USER_DATA_UPDATED:
 					score = notification.getBody().score as int;
-					(viewComponent as LobbyViewLogic).unlockLevels(score, gameInfoDO);
+					viewComponent.unlockLevels(score, gameInfoDO);
 					break;
 				case GeneralNotifications.LEVELS_CONFIGS_LOADED:
 					gameInfoDO = notification.getBody() as Array;
 					break;
 				case GeneralNotifications.CLEAR_USER:
-					(viewComponent as LobbyViewLogic).unlockLevels(0, gameInfoDO);
+					viewComponent.unlockLevels(0, gameInfoDO);
 					break;
 			}	
 		}	

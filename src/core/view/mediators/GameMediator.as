@@ -10,16 +10,24 @@ package core.view.mediators {
 	public class GameMediator extends UIMediator {
 
 		static public const NAME:String = "GameMediator";
-		private var _viewElement:GameViewLogic;
+
+		private var viewElement:GameViewLogic;
 
         public function GameMediator(viewElement:GameViewLogic) {
 
-			_viewElement = viewElement;
-			super(NAME, _viewElement);
-			_viewElement.addEventListener(CustomEvent.KEY_PRESSED,handlerOnKeyPressed);
-			_viewElement.addEventListener(CustomEvent.LEVEL_CLEAR,handlerOnLevelClear);
-			_viewElement.addEventListener(CustomEvent.UPDATE_LEVEL_SCORE,handlerUpdateLevelScore);
+			this.viewElement = viewElement;
+
+			super(NAME, viewElement);
+
+			addListeners();
 		}
+
+        private function addListeners():void {
+
+            viewElement.addEventListener(CustomEvent.KEY_PRESSED, handlerOnKeyPressed);
+            viewElement.addEventListener(CustomEvent.LEVEL_CLEAR, handlerOnLevelClear);
+            viewElement.addEventListener(CustomEvent.UPDATE_LEVEL_SCORE, handlerUpdateLevelScore);
+        }
 
 		public function handlerOnKeyPressed(event:CustomEvent):void {
 
@@ -47,13 +55,13 @@ package core.view.mediators {
 
 			switch(notification.getName()){
 				case GeneralNotifications.LETTER_TRUE:
-					(_viewElement as GameViewLogic).letterTrue(notification.getBody() as Number);
+					viewElement.letterTrue(notification.getBody() as Number);
 					break;
 				case GeneralNotifications.LETTER_FALSE:
-					(_viewElement as GameViewLogic).letterFalse(notification.getBody() as Number);
+					viewElement.letterFalse(notification.getBody() as Number);
 					break;
 				case GeneralNotifications.NEW_LEVEL_LETTERS:
-					(_viewElement as GameViewLogic).restartLevel(notification.getBody() as String);
+					viewElement.restartLevel(notification.getBody() as String);
 					break;
 			}
 		}

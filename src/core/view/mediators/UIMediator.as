@@ -8,8 +8,6 @@ package core.view.mediators {
 	
 	public class UIMediator	extends Mediator {
 
-		public static const NAME:String="UIMediator";
-
         public function UIMediator(name:String, viewElement:ViewLogic) {
 
 			super(name, viewElement);
