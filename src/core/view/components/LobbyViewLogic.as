@@ -26,7 +26,7 @@ package core.view.components {
 				
 		public function unlockLevels(score:int, gameInfoDO:Array):void {
 
-			gameInfoDO=gameInfoDO;
+			gameInfoDO = gameInfoDO;
 
             for(var i:int = 0; i < gameInfoDO.length; i++) {
 
@@ -57,7 +57,7 @@ package core.view.components {
             for(var i:int = 1; i < gameInfoDO.length; i++) {
 
 				if(event.target.name == "Lock" +(i+1)) {
-					(message.getChildByName("UnlockValueText") as TextField).text = "Нужно набрать " + gameInfoDO[i].unlockValue + " очков!";
+					(message.getChildByName("UnlockValueText") as TextField).text = "You need " + gameInfoDO[i].unlockValue + " points!";
 				}
 			}
 

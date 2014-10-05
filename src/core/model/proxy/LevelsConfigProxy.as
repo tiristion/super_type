@@ -50,7 +50,8 @@ package core.model.proxy {
 
 		public function getLevelInfo(id:String):LevelConfigDO {
 
-			for(var i:int = 0; i<_levelsInfoDO.length; i++) {
+			for(var i:int = 0;  i < _levelsInfoDO.length; i++) {
+
 				if (_levelsInfoDO[i].id == id) {
 					return _levelsInfoDO[i];
 				} 

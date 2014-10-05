@@ -21,9 +21,9 @@ package core.view.components {
 		private var levelScore:Number;
 		private var mistakes:Number;
 		
-		public function GameViewLogic(levelId:String,levelString:String) {
+		public function GameViewLogic(levelId:String, levelString:String) {
 
-			levelId = levelId;
+			this.levelId = levelId;
 			position = 0;
 			levelScore = 0;
 			scene = new (WarehouseAssets.getInstance().getAsset("Scene", levelId) as Class);
@@ -50,18 +50,26 @@ package core.view.components {
 
             for(i = 0; i < letters.length; i++) {
 
-				var letter:TextField = new TextField();
-				letter.text = letters[i];
-				letter.x = begin+15;
-				letter.y = 250;
-				letter.border = true;
-				letter.width = 12;
-				letter.height = 20;
-				scene.addChild(letter);
+                var letter:TextField = createLetter(i, begin);
+                scene.addChild(letter);
 				lettersIndex[i] = scene.getChildIndex(letter);
 				begin = begin +15;
 			}
 		}
+
+        private function createLetter(letterNumber:int, xPosition:int):TextField {
+
+            var letter:TextField = new TextField();
+
+            letter.text = letters[letterNumber];
+            letter.x = xPosition + 15;
+            letter.y = 250;
+            letter.border = true;
+            letter.width = 12;
+            letter.height = 20;
+
+            return letter;
+        }
 		
 		public function handlerOnKeyDown(event:KeyboardEvent):void {
 
@@ -86,25 +94,30 @@ package core.view.components {
 
         public function letterFalse(mistakes:Number):void {
 
-			mistakes=mistakes;
+			this.mistakes = mistakes;
 			levelScore -= 5;
 
             if(levelScore < 0) {
                 levelScore = 0;
             }
 
-			dispatchEvent(new CustomEvent(CustomEvent.UPDATE_LEVEL_SCORE,{levelScore:levelScore,mistakes:mistakes}));
+			dispatchEvent(new CustomEvent(CustomEvent.UPDATE_LEVEL_SCORE, {levelScore:levelScore, mistakes:mistakes}));
 		}
 
 		public function restartLevel(levelString:String):void {
 
-			for(var i:int = 0; i < lettersIndex.length; i++) {
+			removeCurrentLetters();
+            setLetters(levelString);
+			content.stage.focus = content;
+		}
+
+        private function removeCurrentLetters():void {
+
+            for (var i:int = 0; i < lettersIndex.length; i++) {
                 scene.removeChildAt(lettersIndex[0]);
             }
 
-            setLetters(levelString);
-			position = 0;
-			content.stage.focus = content; 
-		}
+            position = 0;
+        }
 	}
 }
