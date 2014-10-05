@@ -12,31 +12,33 @@ package core.view.components {
 	
 	public class LobbyViewLogic extends ViewLogic {
 
-		public static const NAME:String="LobbyViewLogic";
-		private var _sprite:DisplayObjectContainer;
-		private var _gameInfoDO:Array;
-		private var _message:DisplayObjectContainer;
+		public static const NAME:String = "LobbyViewLogic";
+
+		private var lobbyContainer:DisplayObjectContainer;
+		private var gameInfoDO:Array;
+		private var message:DisplayObjectContainer;
 		
 		public function LobbyViewLogic() {
 
-			_sprite= new (WarehouseAssets.getInstance().getAsset("Lobby") as Class);
-			super(_sprite);
+			lobbyContainer= new (WarehouseAssets.getInstance().getAsset("Lobby") as Class);
+			super(lobbyContainer);
 		}
 				
-		public function unlockLevels(score:int,gameInfoDO:Array):void {
+		public function unlockLevels(score:int, gameInfoDO:Array):void {
 
-			_gameInfoDO=gameInfoDO;
+			gameInfoDO=gameInfoDO;
 
-            for(var i:int=0; i<_gameInfoDO.length; i++) {
+            for(var i:int = 0; i < gameInfoDO.length; i++) {
 
-                if(score>=gameInfoDO[i].unlockValue) {
-					if(i!=0)
-						_sprite['Lock'+(i+1)].visible = false;
-					_sprite['Level'+(i+1)+'Button'].addEventListener(MouseEvent.CLICK, handlerOnLevelIconClick);
+                if(score >= gameInfoDO[i].unlockValue) {
+					if(i!=0) {
+                        lobbyContainer['Lock'+(i+1)].visible = false;
+                    }
+					lobbyContainer['Level'+(i+1)+'Button'].addEventListener(MouseEvent.CLICK, handlerOnLevelIconClick);
 				} else {
-					_sprite['Lock'+(i+1)].visible = true;
-					_sprite['Lock'+(i+1)].addEventListener(MouseEvent.MOUSE_OVER, showUnlockValue);
-					_sprite['Lock'+(i+1)].addEventListener(MouseEvent.MOUSE_OUT, hideUnlockValue)
+					lobbyContainer['Lock'+(i+1)].visible = true;
+					lobbyContainer['Lock'+(i+1)].addEventListener(MouseEvent.MOUSE_OVER, showUnlockValue);
+					lobbyContainer['Lock'+(i+1)].addEventListener(MouseEvent.MOUSE_OUT, hideUnlockValue)
 				}
 			}
 		}
@@ -44,29 +46,30 @@ package core.view.components {
 		private function handlerOnLevelIconClick(event:Event):void {
 
 			var levelName:String = event.target.name.replace("Button", "");
-			dispatchEvent(new CustomEvent(CustomEvent.LEVEL_CLICKED,levelName));
+			dispatchEvent(new CustomEvent(CustomEvent.GAME_ICON_CLICKED, levelName));
 		}
 		
 		public function showUnlockValue(event:MouseEvent):void {
 
-			var sprite:DisplayObjectContainer = _sprite as MovieClip;
-			_message = new (WarehouseAssets.getInstance().getAsset("UnlockValue") as Class);
+			var sprite:DisplayObjectContainer = lobbyContainer as MovieClip;
+			message = new (WarehouseAssets.getInstance().getAsset("UnlockValue") as Class);
 
-            for(var i:int=1; i<_gameInfoDO.length; i++) {
-				if(event.target.name=="Lock"+(i+1)) {
-					(_message.getChildByName("UnlockValueText") as TextField).text = "Нужно набрать "+_gameInfoDO[i].unlockValue+" очков!";
+            for(var i:int = 1; i < gameInfoDO.length; i++) {
+
+				if(event.target.name == "Lock" +(i+1)) {
+					(message.getChildByName("UnlockValueText") as TextField).text = "Нужно набрать " + gameInfoDO[i].unlockValue + " очков!";
 				}
 			}
 
-            _message.x=(event.target as MovieClip).x + 9 ;
-			_message.y=(event.target as MovieClip).y + 71;
-			sprite.addChild(_message);
+            message.x=(event.target as MovieClip).x + 9 ;
+			message.y=(event.target as MovieClip).y + 71;
+			sprite.addChild(message);
 		}
 		
 		public function hideUnlockValue(event:MouseEvent):void {
 
-			var sprite:DisplayObjectContainer = _sprite as MovieClip;
-			sprite.removeChild(_message);
+			var sprite:DisplayObjectContainer = lobbyContainer as MovieClip;
+			sprite.removeChild(message);
 		}
 	}
 }

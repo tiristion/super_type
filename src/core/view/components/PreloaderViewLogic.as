@@ -6,33 +6,40 @@ package core.view.components {
 	
 	public class PreloaderViewLogic extends EventDispatcher {
 
-		public static const NAME:String="PreloaderViewLogic";
-		private var _preloader:Shape = new Shape();
+		public static const NAME:String = "PreloaderViewLogic";
+
+		private var preloader:Shape = new Shape();
 
         public function PreloaderViewLogic() {
 
-			_preloader.graphics.clear();
-			_preloader.graphics.lineStyle(1);
-			_preloader.graphics.drawRect(200, 100, 110, 20);
-			_preloader.graphics.beginFill(0);
-			_preloader.graphics.drawRect(200, 100, 50, 20);
-			_preloader.graphics.endFill();
-			super(_preloader);
+            initializePreloader();
+
+			super(preloader);
 		}
+
+        private function initializePreloader():void {
+
+            preloader.graphics.clear();
+            preloader.graphics.lineStyle(1);
+            preloader.graphics.drawRect(200, 100, 110, 20);
+            preloader.graphics.beginFill(0);
+            preloader.graphics.drawRect(200, 100, 50, 20);
+            preloader.graphics.endFill();
+        }
 
 		public function get content():DisplayObject {
 
-			return _preloader;
+			return preloader;
 		}
 
 		public function update(progress:int):void {
 
-			_preloader.graphics.clear();
-			_preloader.graphics.lineStyle(1);
-			_preloader.graphics.drawRect(200, 100, 110, 20);
-			_preloader.graphics.beginFill(0);
-			_preloader.graphics.drawRect(200, 100, 10 + progress, 20);
-			_preloader.graphics.endFill();
+			preloader.graphics.clear();
+			preloader.graphics.lineStyle(1);
+			preloader.graphics.drawRect(200, 100, 110, 20);
+			preloader.graphics.beginFill(0);
+			preloader.graphics.drawRect(200, 100, 10 + progress, 20);
+			preloader.graphics.endFill();
 		}
 	}
 }

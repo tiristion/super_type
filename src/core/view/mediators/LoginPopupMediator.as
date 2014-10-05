@@ -18,9 +18,11 @@ package core.view.mediators {
 		
 		public function LoginPopupMediator(popupViewLogic:LoginPopupViewLogic, doActionDO:PopupDoActionDO=null) {
 
-			super( popupViewLogic.dialogName, popupViewLogic );
+			super(popupViewLogic.dialogName, popupViewLogic);
+
 			this.doActionDo = doActionDO;
 			dialogName = popupViewLogic.dialogName;
+
 			popupViewLogic.content['doButton'].addEventListener( MouseEvent.CLICK, doButtonHandler);
 		}
 
@@ -51,7 +53,7 @@ package core.view.mediators {
 			user.name = viewLogic.content["InputUserName"].text;
 			user.password = viewLogic.content["InputUserPassword"].text;
 
-            if(user.name!="") {
+            if(user.name != "") {
 				 sendNotification(doActionDo.notificationName,user);
 			 }
 		}

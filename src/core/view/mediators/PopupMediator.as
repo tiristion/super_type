@@ -28,12 +28,12 @@ package core.view.mediators
 			sendNotification(GeneralNotifications.CLOSE_POPUP, dialogName);
 		}
 
-		public function closePopup( event:Event = null ):void {
+		public function closePopup(event:Event):void {
 
 			sendNotification(GeneralNotifications.CLOSE_POPUP, dialogName);
 
-            if(doActionDo.doNotificationAfterClose!=null) {
-                sendNotification(doActionDo.doNotificationAfterClose,doActionDo.doNotificationAfterCloseBody);
+            if(doActionDo.doNotificationAfterClose != null) {
+                sendNotification(doActionDo.doNotificationAfterClose, doActionDo.doNotificationAfterCloseBody);
             }
 		}
 	}	

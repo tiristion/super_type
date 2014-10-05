@@ -13,8 +13,9 @@ package core.controller.commands {
 
 		override public function execute(notification:INotification):void {
 
-			var lostLevelDADO:PopupDoActionDO = new PopupDoActionDO(GeneralNotifications.RESTART_LEVEL,notification.getBody(),GeneralNotifications.LEVEL_END,{levelScore:0});
-			facade.registerMediator(new PopupMediator(new PopupViewLogic('PopupLostLevel'),lostLevelDADO));
+            var levelId:String = notification.getBody() as String;
+			var lostLevelDADO:PopupDoActionDO = new PopupDoActionDO(GeneralNotifications.RESTART_LEVEL, levelId, GeneralNotifications.LEVEL_END, {levelScore:0});
+			facade.registerMediator(new PopupMediator(new PopupViewLogic('PopupLostLevel'), lostLevelDADO));
 		}
 	}
 }

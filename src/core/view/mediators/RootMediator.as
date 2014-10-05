@@ -24,8 +24,10 @@ package core.view.mediators {
 		
 		override public function listNotificationInterests():Array {
 
-		 	return	[ GeneralNotifications.ADD_CHILD_TO_ROOT,
-				 GeneralNotifications.REMOVE_CHILD_FROM_ROOT ];
+		 	return [
+                GeneralNotifications.ADD_CHILD_TO_ROOT,
+				GeneralNotifications.REMOVE_CHILD_FROM_ROOT
+            ];
 		} 
 		
 		override public function handleNotification(notification:INotification):void {
