@@ -33,10 +33,9 @@ package core.controller.commands {
 
 		private function createLevelString():String {
 
-			var lettersArray:Array = [];
-			var levelString:String = ""; 
+			var levelString:String = "";
 
-            for(var i:int=0;i<20;i++) {
+            for(var i:int = 0; i < 20; i++) {
 
 				var nom:int = Math.round(Math.random() * levelConfig.letters.length) - 1;
 
@@ -45,7 +44,6 @@ package core.controller.commands {
                 }
 
 				levelString = levelString + levelConfig.letters.charAt(nom);
-				lettersArray[i] = levelConfig.letters.charAt(nom);
 			}
 
 			return levelString;
