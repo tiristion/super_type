@@ -11,11 +11,7 @@ package core {
 
 		public static function getInstance():ApplicationFacade {
 
-			if(instance==null) {
-				instance=new ApplicationFacade();
-			}
-
-			return instance as ApplicationFacade;
+			return instance ? instance as ApplicationFacade : new ApplicationFacade();
 		}
 
 		public function startup(command:Class,root:Sprite):void {

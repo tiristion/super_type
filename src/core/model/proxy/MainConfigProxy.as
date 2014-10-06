@@ -34,9 +34,10 @@ package core.model.proxy {
 			(event.target).removeEventListener(Event.COMPLETE, xmlLoaded);
 			this.data = XML(event.target.data);
 			var listXML:XMLList = data.children();
-			var elementsFromXML:Array = new Array();
+			var elementsFromXML:Array = [];
 
-            for(var i:int=0; i<listXML.length(); i++) {
+            for(var i:int = 0; i < listXML.length(); i++) {
+
 				var xmlElement:XMLElementDO = new XMLElementDO;
 				xmlElement.name = listXML[i].attribute("name");
 				xmlElement.type = listXML[i].attribute("type");

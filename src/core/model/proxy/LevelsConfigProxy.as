@@ -9,15 +9,13 @@ package core.model.proxy {
 	public class LevelsConfigProxy extends Proxy {
 
 		public static const NAME:String = "LevelsConfigProxy";
-		private var _listGamesconfigXML:XMLList;
-		private var _levelsInfoDO:Array = [];
-		private var _urlPath:String;
-		private var _xml:XML;
-		
+		private var levelsInfoDO:Array = [];
+		private var xml:XML;
+
 		public function LevelsConfigProxy(xml:XML) {
 
-			_xml=xml;
-			super(NAME,_xml);
+			this.xml = xml;
+			super(NAME, xml);
 		}
 
 		override public function onRegister():void {
@@ -28,34 +26,36 @@ package core.model.proxy {
 
 		private function levelsxmlLoaded():void {
 
-			var levelslistXML:XMLList = _xml.children();
+			var levelslistXML:XMLList = xml.children();
 
-            for(var i:int=0; i<levelslistXML.length(); i++) {
-                var level:LevelConfigDO = new LevelConfigDO;
+            for(var i:int = 0; i < levelslistXML.length(); i++) {
+
+                var level:LevelConfigDO = new LevelConfigDO();
 				level.id = levelslistXML[i].attribute("id");
 				level.url = levelslistXML[i].attribute("url");
 				level.unlockValue = levelslistXML[i].attribute("unlock");
 				level.letters = levelslistXML[i].attribute("letters");
 				level.mistakes = levelslistXML[i].attribute("mistakes");
-				_levelsInfoDO[i]=level;
+				levelsInfoDO.push(level);
 			}
 
-			sendNotification(GeneralNotifications.LEVELS_CONFIGS_LOADED,_levelsInfoDO);
+			sendNotification(GeneralNotifications.LEVELS_CONFIGS_LOADED, levelsInfoDO);
 		}
 
 		public function get levelInfo():Array {
 
-			return _levelsInfoDO;
+			return levelsInfoDO;
 		}
 
-		public function getLevelInfo(id:String):LevelConfigDO {
+		public function getLevelInfoById(id:String):LevelConfigDO {
 
-			for(var i:int = 0;  i < _levelsInfoDO.length; i++) {
+			for(var i:int = 0;  i < levelsInfoDO.length; i++) {
 
-				if (_levelsInfoDO[i].id == id) {
-					return _levelsInfoDO[i];
+				if (levelsInfoDO[i].id == id) {
+					return levelsInfoDO[i];
 				} 
 			}
+
 			return null;
 		}
 	}

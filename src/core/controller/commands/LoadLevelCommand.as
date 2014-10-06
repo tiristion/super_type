@@ -22,11 +22,12 @@ package core.controller.commands {
 	public class LoadLevelCommand extends SimpleCommand {
 
 		private var levelConfig:LevelConfigDO;
+        private static const LETTERS_QUANTITY:uint = 20;
 
 		override public function execute(notification:INotification):void {
 
             var levelId:String = notification.getBody() as String;
-            levelConfig = levelsConfigProxy.getLevelInfo(levelId);
+            levelConfig = levelsConfigProxy.getLevelInfoById(levelId);
 
             WarehouseAssets.getInstance().hasAsset(levelId) ? startLevel() : loadLevel();
 		}
@@ -62,14 +63,14 @@ package core.controller.commands {
 
 			var levelString:String = '';
 
-			for(var i:int = 0; i < 20; i++){
+			for(var i:int = 0; i < LETTERS_QUANTITY; i++){
 
-				var nom:int = Math.round(Math.random()*levelConfig.letters.length);
+				var nom:int = Math.round(Math.random() * levelConfig.letters.length);
 
-				if(nom != levelConfig.letters.length) {
-					levelString = levelString + levelConfig.letters.charAt(nom);
+				if(nom == levelConfig.letters.length) {
+                    i--;
 				} else {
-					i--;
+                    levelString = levelString + levelConfig.letters.charAt(nom);
 				}
 			}
 

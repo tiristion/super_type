@@ -17,7 +17,6 @@ package core.controller.commands {
 		override public function execute(notification:INotification):void {
 
 			registerMainMediators();
-
 			sendNotification(GeneralNotifications.LEVELS_CONFIGS_LOADED, levelsConfigProxy.levelInfo);
 		}
 

@@ -26,7 +26,7 @@ package core.view.components {
 				
 		public function unlockLevels(score:int, gameInfoDO:Array):void {
 
-			gameInfoDO = gameInfoDO;
+			this.gameInfoDO = gameInfoDO;
 
             for(var i:int = 0; i < gameInfoDO.length; i++) {
 

@@ -16,7 +16,7 @@ package core.controller.commands {
 		override public function execute(notification:INotification):void {
 
             var levelId:String = notification.getBody() as String;
-			levelConfig = levelsConfigProxy.getLevelInfo(levelId);
+			levelConfig = levelsConfigProxy.getLevelInfoById(levelId);
 
 			var currentLevelConfig:LevelConfigDO = new LevelConfigDO();
 			currentLevelConfig.id = levelConfig.id;

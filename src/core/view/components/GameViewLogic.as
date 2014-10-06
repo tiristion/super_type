@@ -74,7 +74,7 @@ package core.view.components {
 		public function handlerOnKeyDown(event:KeyboardEvent):void {
 
 			var letterCode:Number = event.charCode;
-			dispatchEvent(new CustomEvent(CustomEvent.KEY_PRESSED,{code:letterCode,position:position}));
+			dispatchEvent(new CustomEvent(CustomEvent.KEY_PRESSED, {code:letterCode, position:position}));
 		}
 		
 		public function letterTrue(mistakes:Number):void {
@@ -84,10 +84,10 @@ package core.view.components {
 			scene.getChildAt(lettersIndex[position]).visible = false;
 			position++;
 			woolf.x = woolf.x + 15;
-			dispatchEvent(new CustomEvent(CustomEvent.UPDATE_LEVEL_SCORE,{levelScore:levelScore,mistakes:mistakes}));
+			dispatchEvent(new CustomEvent(CustomEvent.UPDATE_LEVEL_SCORE, {levelScore:levelScore, mistakes:mistakes}));
 
             if (position == letters.length) {
-				dispatchEvent(new CustomEvent(CustomEvent.LEVEL_CLEAR,{levelScore:levelScore,mistakes:mistakes,levelId:levelId}));
+				dispatchEvent(new CustomEvent(CustomEvent.LEVEL_CLEAR, {levelScore:levelScore, mistakes:mistakes, levelId:levelId}));
 				levelScore = 0;
 			}
 		}
@@ -113,7 +113,7 @@ package core.view.components {
 
         private function removeCurrentLetters():void {
 
-            for (var i:int = 0; i < lettersIndex.length; i++) {
+            for(var i:int = 0; i < lettersIndex.length; i++) {
                 scene.removeChildAt(lettersIndex[0]);
             }
 

@@ -50,7 +50,7 @@ package core.controller.commands {
 			var multiLoader:MultiLoader = MultiLoader(event.target);
 			var progress:int = Math.floor(multiLoader.progress*100);
 
-			sendNotification(GeneralNotifications.PRELOADER_UPDATE,progress)
+			sendNotification(GeneralNotifications.PRELOADER_UPDATE, progress)
 		}
 	
 		private function onItemComplete(event:Event):void {
@@ -62,7 +62,7 @@ package core.controller.commands {
 			facade.removeMediator(PreloaderMediator.NAME);
 			var multiLoader:MultiLoader = event.target as MultiLoader;
 
-            for(var i:int=0;i<multiLoader.length;i++) {
+            for(var i:int = 0; i < multiLoader.length; i++) {
 
 				var registrationNameOfTask:String=multiLoader.getItemRegistrationName(i);
 

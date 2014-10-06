@@ -26,7 +26,7 @@ package core.view.mediators {
 			popupViewLogic.content['doButton'].addEventListener( MouseEvent.CLICK, doButtonHandler);
 		}
 
-		public function closePopup( event:Event = null ):void {
+		public function closePopup(event:Event = null):void {
 
 			sendNotification(GeneralNotifications.CLOSE_POPUP, dialogName);
 		}
@@ -49,12 +49,12 @@ package core.view.mediators {
 
 		public function doButtonHandler(event:MouseEvent):void {
 
-			var user:UserDO = new UserDO;
-			user.name = viewLogic.content["InputUserName"].text;
-			user.password = viewLogic.content["InputUserPassword"].text;
+			var userData:UserDO = new UserDO();
+			userData.name = viewLogic.content["InputUserName"].text;
+			userData.password = viewLogic.content["InputUserPassword"].text;
 
-            if(user.name != "") {
-				 sendNotification(doActionDo.notificationName,user);
+            if(userData.name != '') {
+				 sendNotification(doActionDo.notificationName, userData);
 			 }
 		}
 	}

@@ -13,9 +13,13 @@ package core.controller.commands {
 
 		override public function execute(notification:INotification):void {
 
-			var userProxy:UserProxy = facade.retrieveProxy(UserProxy.NAME) as UserProxy;
 			userProxy.clearUserData();
 			SharedStorage.getInstance().saveUserData(userProxy.userData);
 		}
+
+        private function get userProxy():UserProxy {
+
+            return facade.retrieveProxy(UserProxy.NAME) as UserProxy;
+        }
 	}
 }

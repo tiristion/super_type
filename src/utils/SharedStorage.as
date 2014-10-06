@@ -6,52 +6,52 @@ package utils {
 
 	public class SharedStorage {
 
-		private static var _instance:SharedStorage;
-		private var _sharedObjectUser:SharedObject;
+		private static var instance:SharedStorage;
+		private var sharedObjectUser:SharedObject;
 		
 		static public function getInstance():SharedStorage {
 
-			if (_instance == null) {
-				_instance = new SharedStorage();
+			if (instance == null) {
+				instance = new SharedStorage();
 			}
 
-			return _instance;
+			return instance;
 		}
 		
 		public function createShared(sharedName:String):void {
 
-			_sharedObjectUser = SharedObject.getLocal(sharedName);
+			sharedObjectUser = SharedObject.getLocal(sharedName);
 		}
 		
-		public function hasUserData():Boolean{
+		public function hasUserData():Boolean {
 
-			return (_sharedObjectUser.data.userData != null);
+			return (sharedObjectUser.data.userData != null);
 		}
 		
 		public function checkPassword(password:String):Boolean {
 
-            return (_sharedObjectUser.data.userData.password == password);
+            return (sharedObjectUser.data.userData.password == password);
 		}
 		
 		public function getUserData():UserDO {
 
-			var userDO:UserDO = new UserDO;
-			userDO.name = _sharedObjectUser.data.userData.name;
-			userDO.password = _sharedObjectUser.data.userData.password;
-			userDO.score = _sharedObjectUser.data.userData.score;
+			var userDO:UserDO = new UserDO();
+			userDO.name = sharedObjectUser.data.userData.name;
+			userDO.password = sharedObjectUser.data.userData.password;
+			userDO.score = sharedObjectUser.data.userData.score;
 			return userDO;
 		}
 		
 		public function createUser(sharedName:String,userPassword:String):void {
 
-            _sharedObjectUser.data.userData = {name:sharedName,password:userPassword,score:0};
-			_sharedObjectUser.flush();
+            sharedObjectUser.data.userData = {name:sharedName,password:userPassword,score:0};
+			sharedObjectUser.flush();
 		}
 		
 		public function saveUserData(userData:UserDO):void {
 
-            _sharedObjectUser.data.userData = userData;
-			_sharedObjectUser.flush();
+            sharedObjectUser.data.userData = userData;
+			sharedObjectUser.flush();
 		}
 	}
 }

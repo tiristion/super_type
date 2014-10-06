@@ -1,6 +1,6 @@
 package core.model.dataobject {
 
-	public class UserDO extends Object {
+	public class UserDO {
         
 		public var name:String;
 		public var password:String;

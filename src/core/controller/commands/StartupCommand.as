@@ -19,21 +19,21 @@ package core.controller.commands {
 		override public function execute(notification:INotification):void {
 
 			//application initialization
-			var root:Sprite=notification.getBody() as Sprite;
+			var root:Sprite = notification.getBody() as Sprite;
 		
 			//register Commands
-			facade.registerCommand(GeneralNotifications.ASSETS_LOADED,LobbyStartCommand);
-			facade.registerCommand(GeneralNotifications.LOAD_ASSETS,AssetsLoadingCommand);
-			facade.registerCommand(GeneralNotifications.CLOSE_POPUP,ClosePopupCommand);
-			facade.registerCommand(GeneralNotifications.REGISTER_USER_INFO,CheckUserCommand);
-			facade.registerCommand(GeneralNotifications.LOAD_LEVEL,LoadLevelCommand);
-			facade.registerCommand(GeneralNotifications.RESTART_LEVEL,RestartLevelCommand);
-			facade.registerCommand(GeneralNotifications.SHOW_LOBBY,ShowLobbyCommand);
-			facade.registerCommand(GeneralNotifications.KEY_PRESSED,KeyPressedCommand);
-			facade.registerCommand(GeneralNotifications.LEVEL_END,SaveUserCommand);
-			facade.registerCommand(GeneralNotifications.CLEAR_USER,ClearUserCommand);
-			facade.registerCommand(GeneralNotifications.LEVEL_LOST,LostLevelCommand);
-			facade.registerCommand(GeneralNotifications.LEVEL_CLEAR,ClearLevelCommand);
+			facade.registerCommand(GeneralNotifications.ASSETS_LOADED, LobbyStartCommand);
+			facade.registerCommand(GeneralNotifications.LOAD_ASSETS, AssetsLoadingCommand);
+			facade.registerCommand(GeneralNotifications.CLOSE_POPUP, ClosePopupCommand);
+			facade.registerCommand(GeneralNotifications.REGISTER_USER_INFO, CheckUserCommand);
+			facade.registerCommand(GeneralNotifications.LOAD_LEVEL, LoadLevelCommand);
+			facade.registerCommand(GeneralNotifications.RESTART_LEVEL, RestartLevelCommand);
+			facade.registerCommand(GeneralNotifications.SHOW_LOBBY, ShowLobbyCommand);
+			facade.registerCommand(GeneralNotifications.KEY_PRESSED, KeyPressedCommand);
+			facade.registerCommand(GeneralNotifications.LEVEL_END, SaveUserCommand);
+			facade.registerCommand(GeneralNotifications.CLEAR_USER, ClearUserCommand);
+			facade.registerCommand(GeneralNotifications.LEVEL_LOST, LostLevelCommand);
+			facade.registerCommand(GeneralNotifications.LEVEL_CLEAR, ClearLevelCommand);
 			
 			//register Mediators
 			facade.registerMediator(new RootMediator(root));

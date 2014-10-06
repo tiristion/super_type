@@ -13,8 +13,8 @@ package core.controller.commands {
 
 		override public function execute(notification:INotification):void {
 
-			var clearLevelDADO:PopupDoActionDO = new PopupDoActionDO(GeneralNotifications.RESTART_LEVEL,(notification.getBody()as Object).levelId,GeneralNotifications.LEVEL_END,notification.getBody());
-			facade.registerMediator(new PopupMediator(new ClearLevelPopupViewLogic('PopupClearLevel',notification.getBody().levelScore),clearLevelDADO));
+			var clearLevelDADO:PopupDoActionDO = new PopupDoActionDO(GeneralNotifications.RESTART_LEVEL, (notification.getBody()as Object).levelId, GeneralNotifications.LEVEL_END, notification.getBody());
+			facade.registerMediator(new PopupMediator(new ClearLevelPopupViewLogic('PopupClearLevel', (notification.getBody() as Object).levelScore), clearLevelDADO));
 		}
 	}
 }

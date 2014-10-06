@@ -13,12 +13,10 @@ package core.view.components {
 
 		public static const NAME:String = "TopPanelViewLogic";
 
-		private var topPanelContainer:DisplayObjectContainer;
-		private var userScoreNumber:Number;
-
 		public function TopPanelViewLogic():void {
 
-			topPanelContainer = new (WarehouseAssets.getInstance().getAsset("TopPanel") as Class);
+			var topPanelContainer:DisplayObjectContainer;
+            topPanelContainer = new (WarehouseAssets.getInstance().getAsset("TopPanel") as Class);
 
 			super(topPanelContainer);
 
@@ -35,8 +33,6 @@ package core.view.components {
         }
 
 		public function userDataUpdate(userName:String,userScore:Number):void {
-
-			userScoreNumber = userScore;
 
 			content["UserName"].text = userName;
 			content["Score"].text = userScore.toString();

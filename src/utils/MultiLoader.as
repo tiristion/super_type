@@ -55,8 +55,8 @@ package utils {
 		* Constructor
 		*/
 		public function MultiLoader() {
-			load_arr = new Array();
-			loaded_obj = new Object();
+			load_arr = [];
+			loaded_obj = {};
 		}
 		
 		/**
@@ -64,20 +64,20 @@ package utils {
 		* 
 		* @param    url    Link to the resource
 		* @param    registrationName    Registration name of the task. Use the registrationName to get access to the loaded content
-		* @param    type    Type of the resourse 
+		* @param    resourceType    Type of the resourse
 		* 
 		* @return    Number of tasks <code>TEXT</code>, or <code>MOVIE</code>. Default value is <code>TEXT</code>.
 		*/
-		public function addTask(url:String, registrationName:String, type:String = TEXT):int {
+		public function addTask(url:String, registrationName:String, resourceType:String = TEXT):int {
 
 			var position:int = load_arr.length;
 			
-			var arr:Array = new Array();
+			var arr:Array = [];
 			load_arr.push(arr);
 			
 			setItemURL(position, url);
 			setItemRegistrationName(position, registrationName);
-			setItemType(position, type);
+			setItemType(position, resourceType);
 			setItemStatus(position, STATUS_AWAITING);
 			
 			return length;
@@ -107,9 +107,9 @@ package utils {
 				if (xmlItem.@preload != "false") {
 					var registrationName:String = xmlItem.name().toString();
 					var url:String = xmlItem.children()[0];
-					var type:String = getTypeByURL(url);
-					if (type) {
-						addTask(url, registrationName, type);
+					var resourceType:String = getTypeByURL(url);
+					if (resourceType) {
+						addTask(url, registrationName, resourceType);
 					} else {
 						addTask(url, registrationName);
 					}
@@ -127,22 +127,18 @@ package utils {
 			var arr:Array = url.split(".");
 			var ext:String = arr[arr.length - 1];
 			var i:int = ext.search(/jpg|png|gif|swf/);
-			var type:String;
+			var resourceType:String;
 
-			if (ext.search(/jpg|png|gif|swf/) >=0) {
-                type = MOVIE;
+			if (ext.search(/jpg|png|gif|swf/) >= 0) {
+                resourceType = MOVIE;
             }
 
-            return type;
+            return resourceType;
 		}
 		
 		public function get progress():Number {
 
-			if (_currentIndex >= length) {
-                return 1;
-            }
-
-            return (_currentIndex + itemProgress)/length;
+            return (_currentIndex >= length) ? 1 : (_currentIndex + itemProgress)/length;
 		}
 		
 		public function get itemProgress():Number {
@@ -245,7 +241,7 @@ package utils {
 		
 		//url
 		private function getItemURL(i:int):String {
-			if (i >= length) i = length -1;
+			if (i >= length) i = length - 1;
 			return load_arr[i][0];
 		}
 		public function setItemURL(i:int, str:String):void {
@@ -253,7 +249,7 @@ package utils {
 		}
 		//registrationName
 		public function getItemRegistrationName(i:int):String {
-			if (i >= length) i = length -1;
+			if (i >= length) i = length - 1;
 			return load_arr[i][1];
 		}
 		private function setItemRegistrationName(i:int, str:String):void {
@@ -261,7 +257,7 @@ package utils {
 		}
 		//type
 		public function getItemType(i:int):String {
-			if (i >= length) i = length -1;
+			if (i >= length) i = length - 1;
 			return load_arr[i][2];
 		}
 		private function setItemType(i:int, str:String):void {
@@ -269,7 +265,7 @@ package utils {
 		}
 		//status
 		public function getItemStatus(i:int):String {
-			if (i >= length) i = length -1;
+			if (i >= length) i = length - 1;
 			return load_arr[i][3];
 		}
 		private function setItemStatus(i:int, str:String):void {
@@ -277,7 +273,7 @@ package utils {
 		}
 		//content
 		public function getItemContent(i:int):Object {
-			if (i >= length) i = length -1;
+			if (i >= length) i = length - 1;
 			return load_arr[i][4];
 		}
 		private function setItemContent(i:int, obj:Object):void {
@@ -286,7 +282,7 @@ package utils {
 		}
 		//content
 		public function getItemLoader(i:int):Object {
-			if (i >= length) i = length -1;
+			if (i >= length) i = length - 1;
 			return load_arr[i][5];
 		}
 		private function setItemLoader(i:int, obj:Object):void {

@@ -1,6 +1,6 @@
 package core.model.dataobject {
 
-	public class LevelConfigDO extends Object {
+	public class LevelConfigDO {
 
 		public var id:String;
 		public var url:String;

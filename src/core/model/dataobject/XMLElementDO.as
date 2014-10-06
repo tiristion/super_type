@@ -1,6 +1,6 @@
 package core.model.dataobject {
 
-	public class XMLElementDO extends Object {
+	public class XMLElementDO {
         
 		public var name:String = null;
 		public var type:String = null;

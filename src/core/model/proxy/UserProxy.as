@@ -9,13 +9,13 @@ package core.model.proxy {
 	public class UserProxy extends Proxy {
 
 		public static const NAME:String = "UserProxy";
-		private var _userDO:UserDO;
+		private var userDO:UserDO;
 
         public function UserProxy(userDO:UserDO) {
 
-            super(NAME,userDO);
-			_userDO = userDO;
-			sendNotification(GeneralNotifications.USER_DATA_UPDATED,_userDO);
+            super(NAME, userDO);
+			this.userDO = userDO;
+			sendNotification(GeneralNotifications.USER_DATA_UPDATED,userDO);
 		}
 
 		override public function onRegister():void {
@@ -30,20 +30,20 @@ package core.model.proxy {
 
 		public function setUserData(userDO:UserDO):void {
 
-			_userDO = userDO;
-			sendNotification(GeneralNotifications.USER_DATA_UPDATED,_userDO);
+			this.userDO = userDO;
+			sendNotification(GeneralNotifications.USER_DATA_UPDATED, userDO);
 		}
 
 		public function updateUserData(levelScore:Number):void {
 
-			_userDO.score += levelScore;
-			sendNotification(GeneralNotifications.USER_DATA_UPDATED,_userDO);
+			userDO.score += levelScore;
+			sendNotification(GeneralNotifications.USER_DATA_UPDATED, userDO);
 		}
 
 		public function clearUserData():void{
 
-			_userDO.score = 0;
-			sendNotification(GeneralNotifications.USER_DATA_UPDATED,_userDO);
+			userDO.score = 0;
+			sendNotification(GeneralNotifications.USER_DATA_UPDATED, userDO);
 		}	
 	}
 }

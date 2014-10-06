@@ -23,7 +23,7 @@ package core.controller.commands {
 			sendNotification(GeneralNotifications.SHOW_USER_LOGIN);
 
 			var loginPopupDADO:PopupDoActionDO = new PopupDoActionDO(GeneralNotifications.REGISTER_USER_INFO);
-			facade.registerMediator(new LoginPopupMediator(new LoginPopupViewLogic(),loginPopupDADO));
+			facade.registerMediator(new LoginPopupMediator(new LoginPopupViewLogic(), loginPopupDADO));
 		}
 	}
 }
