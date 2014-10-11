@@ -15,7 +15,7 @@ package configs {
 		
 		public function CustomEvent(eventName:String, data:* = null) {
 
-			super(eventName,data);
+			super(eventName, data);
 			this.data = data;
 		}
 	}
