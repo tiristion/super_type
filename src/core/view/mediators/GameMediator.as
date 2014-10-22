@@ -36,12 +36,12 @@ package core.view.mediators {
 		
 		public function handlerOnLevelClear(event:CustomEvent):void {
 
-			sendNotification(GeneralNotifications.LEVEL_CLEAR,event.data);
+			sendNotification(GeneralNotifications.LEVEL_CLEAR, event.data);
 		}
 		
 		public function handlerUpdateLevelScore(event:CustomEvent):void {
 
-			sendNotification(GeneralNotifications.UPDATE_LEVEL_SCORE,event.data);
+			sendNotification(GeneralNotifications.UPDATE_LEVEL_SCORE, event.data);
 		}
 		
 		override public function listNotificationInterests():Array {
@@ -57,10 +57,10 @@ package core.view.mediators {
 
 			switch(notification.getName()){
 				case GeneralNotifications.LETTER_TRUE:
-					gameVLogic.letterTrue(notification.getBody() as Number);
+					gameVLogic.correctSymbolEntered(notification.getBody() as Number);
 					break;
 				case GeneralNotifications.LETTER_FALSE:
-					gameVLogic.letterFalse(notification.getBody() as Number);
+					gameVLogic.incorrectSymbolEntered(notification.getBody() as Number);
 					break;
 				case GeneralNotifications.NEW_LEVEL_LETTERS:
 					gameVLogic.restartLevel(notification.getBody() as String);

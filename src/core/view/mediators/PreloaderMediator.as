@@ -31,7 +31,7 @@ package core.view.mediators {
 			switch(notification.getName()) {
 				case GeneralNotifications.PRELOADER_UPDATE:
                     (viewComponent as PreloaderViewLogic).update(notification.getBody() as int);
-					sendNotification(GeneralNotifications.ADD_CHILD_TO_ROOT,viewComponent.content);
+					sendNotification(GeneralNotifications.ADD_CHILD_TO_ROOT, viewComponent.content);
 					break;
 			}
 		}

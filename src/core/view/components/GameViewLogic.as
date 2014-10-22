@@ -1,8 +1,10 @@
 package core.view.components {
 
 	import configs.CustomEvent;
-	
-	import flash.display.DisplayObjectContainer;
+
+import core.model.dataobject.KeyPressedInfo;
+
+import flash.display.DisplayObjectContainer;
 	import flash.events.KeyboardEvent;
 	import flash.text.TextField;
 	
@@ -17,14 +19,14 @@ package core.view.components {
 		private var letters:Array = [];
 		private var lettersIndex:Array = [];
 		private var woolf:DisplayObjectContainer;
-		private var position:int;
+		private var currentLetterPosition:int;
 		private var levelScore:Number;
 		private var mistakes:Number;
 		
 		public function GameViewLogic(levelId:String, levelString:String) {
 
 			this.levelId = levelId;
-			position = 0;
+			currentLetterPosition = 0;
 			levelScore = 0;
 			scene = new (WarehouseAssets.getInstance().getAsset("Scene", levelId) as Class);
 			woolf = new (WarehouseAssets.getInstance().getAsset("Wolf") as Class);
@@ -73,26 +75,29 @@ package core.view.components {
 		
 		public function handlerOnKeyDown(event:KeyboardEvent):void {
 
-			var letterCode:Number = event.charCode;
-			dispatchEvent(new CustomEvent(CustomEvent.KEY_PRESSED, {code:letterCode, position:position}));
+            var keyPressedInfo:KeyPressedInfo = new KeyPressedInfo();
+            keyPressedInfo.letterCharCode = event.charCode;
+            keyPressedInfo.currentLetterposition = currentLetterPosition;
+
+			dispatchEvent(new CustomEvent(CustomEvent.KEY_PRESSED, keyPressedInfo));
 		}
 		
-		public function letterTrue(mistakes:Number):void {
+		public function correctSymbolEntered(mistakes:Number):void {
 
 			this.mistakes = mistakes;
 			levelScore += 3;
-			scene.getChildAt(lettersIndex[position]).visible = false;
-			position++;
+			scene.getChildAt(lettersIndex[currentLetterPosition]).visible = false;
+			currentLetterPosition++;
 			woolf.x = woolf.x + 15;
 			dispatchEvent(new CustomEvent(CustomEvent.UPDATE_LEVEL_SCORE, {levelScore:levelScore, mistakes:mistakes}));
 
-            if (position == letters.length) {
+            if (currentLetterPosition == letters.length) {
 				dispatchEvent(new CustomEvent(CustomEvent.LEVEL_CLEAR, {levelScore:levelScore, mistakes:mistakes, levelId:levelId}));
 				levelScore = 0;
 			}
 		}
 
-        public function letterFalse(mistakes:Number):void {
+        public function incorrectSymbolEntered(mistakes:Number):void {
 
 			this.mistakes = mistakes;
 			levelScore -= 5;
@@ -117,7 +122,7 @@ package core.view.components {
                 scene.removeChildAt(lettersIndex[0]);
             }
 
-            position = 0;
+            currentLetterPosition = 0;
         }
 	}
 }

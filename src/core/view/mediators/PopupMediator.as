@@ -13,7 +13,7 @@ package core.view.mediators
 		protected var doActionDo:PopupDoActionDO;
 		private var dialogName:String;
 		
-		public function PopupMediator(popupViewLogic:PopupViewLogic, doActionDO:PopupDoActionDO=null) {
+		public function PopupMediator(popupViewLogic:PopupViewLogic, doActionDO:PopupDoActionDO = null) {
 
 			super(popupViewLogic.dialogName, popupViewLogic);
 			this.doActionDo = doActionDO;
@@ -32,7 +32,7 @@ package core.view.mediators
 
 			sendNotification(GeneralNotifications.CLOSE_POPUP, dialogName);
 
-            if(doActionDo.doNotificationAfterClose != null) {
+            if(doActionDo.doNotificationAfterClose) {
                 sendNotification(doActionDo.doNotificationAfterClose, doActionDo.doNotificationAfterCloseBody);
             }
 		}

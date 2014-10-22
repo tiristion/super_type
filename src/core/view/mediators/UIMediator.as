@@ -16,13 +16,13 @@ package core.view.mediators {
 		override public function onRegister():void {
 
 			super.onRegister();
-			sendNotification(GeneralNotifications.ADD_CHILD_TO_ROOT,viewLogic.content);
+			sendNotification(GeneralNotifications.ADD_CHILD_TO_ROOT, viewLogic.content);
 		}
 
 		override public function onRemove():void {
 
 			super.onRemove();
-			sendNotification(GeneralNotifications.REMOVE_CHILD_FROM_ROOT,viewLogic.content);
+			sendNotification(GeneralNotifications.REMOVE_CHILD_FROM_ROOT, viewLogic.content);
 		}
 
 		protected function get viewLogic():ViewLogic {

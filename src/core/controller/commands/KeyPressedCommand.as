@@ -1,8 +1,10 @@
 package core.controller.commands {
 
 	import configs.GeneralNotifications;
-	
-	import core.model.proxy.GameProxy;
+
+    import core.model.dataobject.KeyPressedInfo;
+
+    import core.model.proxy.GameProxy;
 
 	import org.puremvc.as3.interfaces.INotification;
 	import org.puremvc.as3.patterns.command.SimpleCommand;
@@ -11,8 +13,9 @@ package core.controller.commands {
 
 		override public function execute(notification:INotification):void {
 
-			var currentLetterCode:Number = (notification.getBody() as Object).code as Number;
-			var currentLetterPosition:Number = (notification.getBody() as Object).position as Number;
+			var keyPressedInfo:KeyPressedInfo = notification.getBody() as KeyPressedInfo;
+            var currentLetterCode:Number = keyPressedInfo.letterCharCode;
+			var currentLetterPosition:Number = keyPressedInfo.currentLetterposition;
 			var letters:String = (gameProxy.getData() as Object).letters;
 			var mistakes:Number = (gameProxy.getData() as Object).mistakes;
 

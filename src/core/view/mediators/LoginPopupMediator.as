@@ -16,7 +16,7 @@ package core.view.mediators {
 		protected var doActionDo:PopupDoActionDO;
 		private var dialogName:String;
 		
-		public function LoginPopupMediator(popupViewLogic:LoginPopupViewLogic, doActionDO:PopupDoActionDO=null) {
+		public function LoginPopupMediator(popupViewLogic:LoginPopupViewLogic, doActionDO:PopupDoActionDO) {
 
 			super(popupViewLogic.dialogName, popupViewLogic);
 
@@ -33,7 +33,10 @@ package core.view.mediators {
 		
 		override public function listNotificationInterests():Array {
 
-			return[GeneralNotifications.PASSWORD_ACCEPTED,GeneralNotifications.PASSWORD_DENIED];
+			return[
+                GeneralNotifications.PASSWORD_ACCEPTED,
+                GeneralNotifications.PASSWORD_DENIED
+            ];
 		}
 
 		override public function handleNotification(notification:INotification):void {
@@ -42,7 +45,7 @@ package core.view.mediators {
 					closePopup();
 					break;
 				case GeneralNotifications.PASSWORD_DENIED:
-					viewLogic.content["ErrorMessage"].visible=true;
+					viewLogic.content["ErrorMessage"].visible = true;
 					break;
 			}
 		}
