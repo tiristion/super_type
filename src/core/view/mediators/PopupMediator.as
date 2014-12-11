@@ -1,5 +1,5 @@
-package core.view.mediators
-{
+package core.view.mediators {
+
 	import configs.GeneralNotifications;
 	
 	import core.model.dataobject.PopupDoActionDO;
@@ -22,7 +22,7 @@ package core.view.mediators
 			popupViewLogic.content['doButton'].addEventListener(MouseEvent.CLICK, doButtonHandler);
 		}
 
-		public function doButtonHandler( event:Event ):void {
+		public function doButtonHandler(event:Event):void {
 
 			sendNotification(doActionDo.notificationName,doActionDo.notificationBody);
 			sendNotification(GeneralNotifications.CLOSE_POPUP, dialogName);
