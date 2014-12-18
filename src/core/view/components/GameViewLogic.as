@@ -2,9 +2,9 @@ package core.view.components {
 
 	import configs.CustomEvent;
 
-import core.model.dataobject.KeyPressedInfo;
+	import core.model.dataobject.KeyPressedInfo;
 
-import flash.display.DisplayObjectContainer;
+	import flash.display.DisplayObjectContainer;
 	import flash.events.KeyboardEvent;
 	import flash.text.TextField;
 	
