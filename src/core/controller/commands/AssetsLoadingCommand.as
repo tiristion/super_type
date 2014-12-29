@@ -60,15 +60,17 @@ package core.controller.commands {
 		private function onComplete(event:Event):void {
 
 			facade.removeMediator(PreloaderMediator.NAME);
+
 			var multiLoader:MultiLoader = event.target as MultiLoader;
 
             for(var i:int = 0; i < multiLoader.length; i++) {
 
-				var registrationNameOfTask:String=multiLoader.getItemRegistrationName(i);
+				var registrationNameOfTask:String = multiLoader.getItemRegistrationName(i);
 
 				if(multiLoader.getItemType(i) == MultiLoader.MOVIE) {
 					WarehouseAssets.getInstance().setAssets([{filename:registrationNameOfTask, content:Loader(multiLoader.getContentByRegistrationName(registrationNameOfTask)).content as MovieClip}]);
 				}
+
 				if(multiLoader.getItemType(i) == MultiLoader.TEXT) {
 					var xml:XML = XML(multiLoader.getContentByRegistrationName(registrationNameOfTask));
 				}

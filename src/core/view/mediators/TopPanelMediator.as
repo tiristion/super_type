@@ -18,9 +18,9 @@ import core.view.components.TopPanelViewLogic;
 
 		private var levelId:String;
 
-        public function TopPanelMediator(viewLogic:TopPanelViewLogic):void{
+        public function TopPanelMediator():void{
 
-			super(NAME, viewLogic);
+			super(NAME, new TopPanelViewLogic());
 		}
 
 		override public function listNotificationInterests():Array {

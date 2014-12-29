@@ -2,7 +2,7 @@ package core.model.proxy {
 
 	import configs.GeneralNotifications;
 	
-	import core.model.dataobject.UserDO;
+	import core.model.vo.UserDO;
 	
 	import org.puremvc.as3.patterns.proxy.Proxy;
 

@@ -16,11 +16,11 @@ package core.view.mediators {
 		private var gameInfoDO:Array;
 		private var score:int;
 
-		public function LobbyMediator(viewComponent:LobbyViewLogic) {
+		public function LobbyMediator() {
 
-			super(NAME, viewComponent);
-            lobbyVLogic = viewComponent;
+			super(NAME, new LobbyViewLogic());
 
+			lobbyVLogic = viewLogic as LobbyViewLogic;
             lobbyVLogic.addEventListener(CustomEvent.GAME_ICON_CLICKED, handlerOnGameIconClick);
 		}
 		

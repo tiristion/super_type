@@ -1,6 +1,6 @@
 package core.model.proxy	{
 
-	import core.model.dataobject.FlashVarsDO;
+	import core.model.vo.FlashVarsDO;
 	
 	import org.puremvc.as3.patterns.proxy.Proxy;
 	

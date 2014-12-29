@@ -1,6 +1,6 @@
 package utils {
 
-	import core.model.dataobject.UserDO;
+	import core.model.vo.UserDO;
 	
 	import flash.net.SharedObject;
 
@@ -42,9 +42,9 @@ package utils {
 			return userDO;
 		}
 		
-		public function createUser(sharedName:String,userPassword:String):void {
+		public function createUser(sharedName:String, userPassword:String):void {
 
-            sharedObjectUser.data.userData = {name:sharedName,password:userPassword,score:0};
+            sharedObjectUser.data.userData = {name:sharedName, password:userPassword, score:0};
 			sharedObjectUser.flush();
 		}
 		

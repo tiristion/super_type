@@ -2,7 +2,7 @@ package core.controller.commands {
 
 	import configs.GeneralNotifications;
 	
-	import core.model.dataobject.LevelConfigDO;
+	import core.model.vo.LevelConfigDO;
 	import core.model.proxy.GameProxy;
 	import core.model.proxy.LevelsConfigProxy;
 	import core.view.components.GameViewLogic;
@@ -21,8 +21,9 @@ package core.controller.commands {
 	
 	public class LoadLevelCommand extends SimpleCommand {
 
+		private static const LETTERS_QUANTITY:uint = 20;
+
 		private var levelConfig:LevelConfigDO;
-        private static const LETTERS_QUANTITY:uint = 20;
 
 		override public function execute(notification:INotification):void {
 

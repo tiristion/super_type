@@ -55,7 +55,7 @@ package core.view.mediators {
 		
 		override public function handleNotification(notification:INotification):void {
 
-			switch(notification.getName()){
+			switch(notification.getName()) {
 				case GeneralNotifications.LETTER_TRUE:
 					gameVLogic.correctSymbolEntered(notification.getBody() as Number);
 					break;

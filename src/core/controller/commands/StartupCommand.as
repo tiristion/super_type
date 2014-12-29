@@ -2,7 +2,7 @@ package core.controller.commands {
 
 	import configs.GeneralNotifications;
 	
-	import core.model.dataobject.FlashVarsDO;
+	import core.model.vo.FlashVarsDO;
 	import core.model.proxy.FlashVarsProxy;
 	import core.model.proxy.MainConfigProxy;
 	import core.view.components.PreloaderViewLogic;

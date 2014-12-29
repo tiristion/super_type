@@ -10,7 +10,7 @@ package core.view.mediators {
 	
 	public class RootMediator extends Mediator {
 
-		static public const NAME:String="RootMediator";
+		static public const NAME:String = "RootMediator";
 		
 		public function RootMediator(viewComponent:Sprite) {
 

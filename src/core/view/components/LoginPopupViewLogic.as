@@ -4,14 +4,11 @@ package core.view.components {
 
 	public class LoginPopupViewLogic extends PopupViewLogic {
 
-		public function LoginPopupViewLogic() {
+		public function LoginPopupViewLogic(name:String) {
 
-			super('PopupUserLogin');
+			super(name);
 
-            var userName:TextField = content["InputUserName"] as TextField;
-			userName.displayAsPassword = true;
-
-            var userPassword:TextField = content["InputUserPassword"] as TextField;
+			(content["InputUserPassword"] as TextField).displayAsPassword = true;
 			(content["ErrorMessage"] as TextField).visible = false;
 		}
 	}

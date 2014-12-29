@@ -2,7 +2,7 @@ package core.controller.commands {
 
 	import configs.GeneralNotifications;
 
-    import core.model.dataobject.KeyPressedInfo;
+    import core.model.vo.KeyPressedInfo;
 
     import core.model.proxy.GameProxy;
 
@@ -15,7 +15,7 @@ package core.controller.commands {
 
 			var keyPressedInfo:KeyPressedInfo = notification.getBody() as KeyPressedInfo;
             var currentLetterCode:Number = keyPressedInfo.letterCharCode;
-			var currentLetterPosition:Number = keyPressedInfo.currentLetterposition;
+			var currentLetterPosition:Number = keyPressedInfo.currentLetterPosition;
 			var letters:String = (gameProxy.getData() as Object).letters;
 			var mistakes:Number = (gameProxy.getData() as Object).mistakes;
 

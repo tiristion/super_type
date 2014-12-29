@@ -1,36 +1,31 @@
 package core.view.mediators {
 
 	import configs.GeneralNotifications;
-	
-	import core.model.dataobject.PopupDoActionDO;
-	import core.model.dataobject.UserDO;
+
+	import core.model.vo.PopupDoActionDO;
+	import core.model.vo.UserDO;
+
 	import core.view.components.LoginPopupViewLogic;
 	
-	import flash.events.Event;
 	import flash.events.MouseEvent;
 	
 	import org.puremvc.as3.interfaces.INotification;
 
 	public class LoginPopupMediator extends UIMediator {
 		
-		protected var doActionDo:PopupDoActionDO;
-		private var dialogName:String;
-		
-		public function LoginPopupMediator(popupViewLogic:LoginPopupViewLogic, doActionDO:PopupDoActionDO) {
+		private static const NAME:String = "PopupUserLogin";
 
-			super(popupViewLogic.dialogName, popupViewLogic);
+		protected var doActionDO:PopupDoActionDO;
 
-			this.doActionDo = doActionDO;
-			dialogName = popupViewLogic.dialogName;
+		public function LoginPopupMediator(doActionDO:PopupDoActionDO) {
 
-			popupViewLogic.content['doButton'].addEventListener( MouseEvent.CLICK, doButtonHandler);
+			super(NAME, new LoginPopupViewLogic(NAME));
+
+			this.doActionDO = doActionDO;
+
+			viewLogic.content['doButton'].addEventListener(MouseEvent.CLICK, doButtonHandler);
 		}
 
-		public function closePopup(event:Event = null):void {
-
-			sendNotification(GeneralNotifications.CLOSE_POPUP, dialogName);
-		}
-		
 		override public function listNotificationInterests():Array {
 
 			return[
@@ -40,14 +35,20 @@ package core.view.mediators {
 		}
 
 		override public function handleNotification(notification:INotification):void {
+
 			switch(notification.getName()) {
 				case GeneralNotifications.PASSWORD_ACCEPTED:
-					closePopup();
+					onRemove();
 					break;
 				case GeneralNotifications.PASSWORD_DENIED:
-					viewLogic.content["ErrorMessage"].visible = true;
+					showErrorMessage();
 					break;
 			}
+		}
+
+		private function showErrorMessage():void {
+
+			viewLogic.content["ErrorMessage"].visible = true;
 		}
 
 		public function doButtonHandler(event:MouseEvent):void {
@@ -56,9 +57,9 @@ package core.view.mediators {
 			userData.name = viewLogic.content["InputUserName"].text;
 			userData.password = viewLogic.content["InputUserPassword"].text;
 
-            if(userData.name != '') {
-				 sendNotification(doActionDo.notificationName, userData);
-			 }
+            if(userData.name != "") {
+				 sendNotification(doActionDO.notificationName, userData);
+			}
 		}
 	}
 }

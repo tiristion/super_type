@@ -2,7 +2,7 @@ package core.controller.commands {
 
 	import configs.GeneralNotifications;
 	
-	import core.model.dataobject.PopupDoActionDO;
+	import core.model.vo.PopupDoActionDO;
 	import core.view.components.ClearLevelPopupViewLogic;
 	import core.view.mediators.PopupMediator;
 	

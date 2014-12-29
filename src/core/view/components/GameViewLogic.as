@@ -2,7 +2,7 @@ package core.view.components {
 
 	import configs.CustomEvent;
 
-	import core.model.dataobject.KeyPressedInfo;
+	import core.model.vo.KeyPressedInfo;
 
 	import flash.display.DisplayObjectContainer;
 	import flash.events.KeyboardEvent;
@@ -77,7 +77,7 @@ package core.view.components {
 
             var keyPressedInfo:KeyPressedInfo = new KeyPressedInfo();
             keyPressedInfo.letterCharCode = event.charCode;
-            keyPressedInfo.currentLetterposition = currentLetterPosition;
+            keyPressedInfo.currentLetterPosition = currentLetterPosition;
 
 			dispatchEvent(new CustomEvent(CustomEvent.KEY_PRESSED, keyPressedInfo));
 		}

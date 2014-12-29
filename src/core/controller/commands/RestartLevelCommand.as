@@ -2,7 +2,7 @@ package core.controller.commands {
 
     import configs.GeneralNotifications;
 
-    import core.model.dataobject.LevelConfigDO;
+    import core.model.vo.LevelConfigDO;
     import core.model.proxy.GameProxy;
     import core.model.proxy.LevelsConfigProxy;
 

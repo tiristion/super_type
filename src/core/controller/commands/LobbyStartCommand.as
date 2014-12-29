@@ -2,10 +2,7 @@ package core.controller.commands {
 
 	import configs.GeneralNotifications;
 	
-	import core.model.dataobject.PopupDoActionDO;
-	import core.view.components.LobbyViewLogic;
-	import core.view.components.LoginPopupViewLogic;
-	import core.view.components.TopPanelViewLogic;
+	import core.model.vo.PopupDoActionDO;
 	import core.view.mediators.LobbyMediator;
 	import core.view.mediators.LoginPopupMediator;
 	import core.view.mediators.TopPanelMediator;
@@ -17,13 +14,14 @@ package core.controller.commands {
 
 		override public function execute(notification:INotification):void {
 
-			facade.registerMediator(new LobbyMediator(new LobbyViewLogic()));
-			facade.registerMediator(new TopPanelMediator(new TopPanelViewLogic()));
+			facade.registerMediator(new LobbyMediator());
+			facade.registerMediator(new TopPanelMediator());
 
 			sendNotification(GeneralNotifications.SHOW_USER_LOGIN);
 
-			var loginPopupDADO:PopupDoActionDO = new PopupDoActionDO(GeneralNotifications.REGISTER_USER_INFO);
-			facade.registerMediator(new LoginPopupMediator(new LoginPopupViewLogic(), loginPopupDADO));
+			var loginPopupDoActionDO:PopupDoActionDO;
+			loginPopupDoActionDO = new PopupDoActionDO(GeneralNotifications.REGISTER_USER_INFO);
+			facade.registerMediator(new LoginPopupMediator(loginPopupDoActionDO));
 		}
 	}
 }

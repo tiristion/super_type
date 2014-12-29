@@ -1,6 +1,6 @@
 package core.model.proxy {
 
-	import core.model.dataobject.LevelConfigDO;
+	import core.model.vo.LevelConfigDO;
 	
 	import org.puremvc.as3.patterns.proxy.Proxy;
 	

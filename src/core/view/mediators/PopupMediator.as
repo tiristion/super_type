@@ -2,7 +2,7 @@ package core.view.mediators {
 
 	import configs.GeneralNotifications;
 	
-	import core.model.dataobject.PopupDoActionDO;
+	import core.model.vo.PopupDoActionDO;
 	import core.view.components.PopupViewLogic;
 	
 	import flash.events.Event;

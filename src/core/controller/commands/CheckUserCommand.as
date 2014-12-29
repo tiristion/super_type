@@ -2,7 +2,7 @@ package core.controller.commands {
 
 	import configs.GeneralNotifications;
 	
-	import core.model.dataobject.PopupDoActionDO;
+	import core.model.vo.PopupDoActionDO;
 	import core.model.proxy.UserProxy;
 	import core.view.components.PopupViewLogic;
 	import core.view.mediators.PopupMediator;

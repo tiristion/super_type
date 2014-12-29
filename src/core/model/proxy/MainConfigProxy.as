@@ -2,7 +2,7 @@ package core.model.proxy {
 
 	import configs.GeneralNotifications;
 	
-	import core.model.dataobject.XMLElementDO;
+	import core.model.vo.XMLElementDO;
 	
 	import flash.events.Event;
 	import flash.net.URLLoader;
